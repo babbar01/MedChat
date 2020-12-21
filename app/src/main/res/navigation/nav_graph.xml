@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/listFragment">
+
+    <fragment
+        android:id="@+id/listFragment"
+        android:name="com.example.medchat.ui.listFragment"
+        android:label="fragment_list"
+        tools:layout="@layout/fragment_list" >
+        <action
+            android:id="@+id/action_listFragment_to_addNewPatient"
+            app:destination="@id/addNewPatient" />
+        <action
+            android:id="@+id/action_listFragment_to_chatFragment"
+            app:destination="@id/chatFragment" />
+        <action
+            android:id="@+id/action_listFragment_to_newMessage"
+            app:destination="@id/newMessage" />
+    </fragment>
+    <fragment
+        android:id="@+id/chatFragment"
+        android:name="com.example.medchat.ui.chatFragment"
+        android:label="fragment_chat"
+        tools:layout="@layout/fragment_chat" />
+    <fragment
+        android:id="@+id/addNewPatient"
+        android:name="com.example.medchat.ui.addNewPatient"
+        android:label="fragment_add_new_patient"
+        tools:layout="@layout/fragment_add_new_patient" />
+    <fragment
+        android:id="@+id/newMessage"
+        android:name="com.example.medchat.ui.newMessage"
+        android:label="fragment_new_message"
+        tools:layout="@layout/fragment_new_message" />
+</navigation>
