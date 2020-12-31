@@ -7,18 +7,24 @@
 
     <fragment
         android:id="@+id/listFragment"
-        android:name="com.example.medchat.ui.listFragment"
+        android:name="com.example.medchat.ui.MessageListFragment"
         android:label="fragment_list"
-        tools:layout="@layout/fragment_list" >
+        tools:layout="@layout/fragment_message_list" >
         <action
             android:id="@+id/action_listFragment_to_addNewPatient"
-            app:destination="@id/addNewPatient" />
+            app:destination="@id/addNewPatient"
+            app:enterAnim="@anim/fragment_open_enter"
+            app:exitAnim="@anim/fragment_open_exit" />
         <action
             android:id="@+id/action_listFragment_to_chatFragment"
-            app:destination="@id/chatFragment" />
+            app:destination="@id/chatFragment"
+            app:enterAnim="@anim/fragment_open_enter"
+            app:exitAnim="@anim/fragment_open_exit" />
         <action
             android:id="@+id/action_listFragment_to_newMessage"
-            app:destination="@id/newMessage" />
+            app:destination="@id/newMessage"
+            app:enterAnim="@anim/fragment_open_enter"
+            app:exitAnim="@anim/fragment_open_exit" />
     </fragment>
     <fragment
         android:id="@+id/chatFragment"
@@ -27,12 +33,16 @@
         tools:layout="@layout/fragment_chat" />
     <fragment
         android:id="@+id/addNewPatient"
-        android:name="com.example.medchat.ui.addNewPatient"
+        android:name="com.example.medchat.ui.addNewPatientFragment"
         android:label="fragment_add_new_patient"
         tools:layout="@layout/fragment_add_new_patient" />
     <fragment
         android:id="@+id/newMessage"
-        android:name="com.example.medchat.ui.newMessage"
+        android:name="com.example.medchat.ui.NewMessageFragment"
         android:label="fragment_new_message"
-        tools:layout="@layout/fragment_new_message" />
+        tools:layout="@layout/fragment_new_message" >
+        <action
+            android:id="@+id/action_newMessage_to_chatFragment"
+            app:destination="@id/chatFragment" />
+    </fragment>
 </navigation>

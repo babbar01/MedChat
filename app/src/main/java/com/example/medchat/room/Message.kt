@@ -1,9 +1,8 @@
-package com.example.medchat.room.message_table
+package com.example.medchat.room
 
 import androidx.room.Entity
 import androidx.room.ForeignKey
 import androidx.room.PrimaryKey
-import com.example.medchat.room.patient_table.Patient
 
 @Entity(
     tableName = "message_table", foreignKeys = [ForeignKey(
@@ -14,5 +13,6 @@ import com.example.medchat.room.patient_table.Patient
 data class Message(
     @PrimaryKey(autoGenerate = true) val messageId: Int,
     val recieverId: Int,
-    val message: String
+    val message: String,
+    val timestamp: Long?  // because we will put this value in the function of dao not in viewmodel
 )

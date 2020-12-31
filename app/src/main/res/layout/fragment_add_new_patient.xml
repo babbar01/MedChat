@@ -1,14 +1,214 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.addNewPatient">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".ui.addNewPatientFragment">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment" />
+    <ImageView
+        android:id="@+id/patient_logo"
+        android:layout_width="169dp"
+        android:layout_height="82dp"
+        android:src="@drawable/patient_detail_img"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        android:layout_marginTop="50dp"/>
 
-</FrameLayout>
+    <ImageView
+        android:layout_marginLeft="20dp"
+        android:layout_width="32dp"
+        android:layout_height="67dp"
+        android:src="@drawable/box"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        android:layout_marginTop="30dp"/>
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/cardview1"
+        android:layout_width="290dp"
+        android:layout_height="43dp"
+        android:background="@color/colorPrimary"
+        app:layout_constraintTop_toBottomOf="@id/patient_logo"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        android:layout_marginTop="40dp"
+        app:cardCornerRadius="20dp"
+        android:elevation="50dp">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <ImageView
+                android:id="@+id/edit_text_box1"
+                android:layout_width="16dp"
+                android:layout_height="33dp"
+                android:src="@drawable/box"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                android:layout_marginLeft="40dp"/>
+
+            <EditText
+                android:id="@+id/et_patient_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:hint="Name"
+                app:layout_constraintLeft_toRightOf="@id/edit_text_box1"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                android:layout_marginLeft="20dp"
+                android:backgroundTint="@color/colorWhite"/>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </androidx.cardview.widget.CardView>
+
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/cardview2"
+        android:layout_width="290dp"
+        android:layout_height="43dp"
+        android:background="@color/colorPrimary"
+        app:layout_constraintTop_toBottomOf="@id/cardview1"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        android:layout_marginTop="40dp"
+        app:cardCornerRadius="20dp"
+        android:elevation="50dp">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <ImageView
+                android:id="@+id/edit_text_box2"
+                android:layout_width="16dp"
+                android:layout_height="33dp"
+                android:src="@drawable/box"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                android:layout_marginLeft="40dp"/>
+
+            <EditText
+                android:id="@+id/et_patient_age"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:hint="Age"
+                app:layout_constraintLeft_toRightOf="@id/edit_text_box2"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                android:layout_marginLeft="20dp"
+                android:backgroundTint="@color/colorWhite"/>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </androidx.cardview.widget.CardView>
+
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/cardview3"
+        android:layout_width="290dp"
+        android:layout_height="43dp"
+        android:background="@color/colorPrimary"
+        app:layout_constraintTop_toBottomOf="@id/cardview2"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        android:layout_marginTop="40dp"
+        app:cardCornerRadius="20dp"
+        android:elevation="50dp">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <ImageView
+                android:id="@+id/edit_text_box3"
+                android:layout_width="16dp"
+                android:layout_height="33dp"
+                android:src="@drawable/box"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                android:layout_marginLeft="40dp"/>
+
+            <EditText
+                android:id="@+id/et_patient_address"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:hint="Address"
+                app:layout_constraintLeft_toRightOf="@id/edit_text_box3"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                android:layout_marginLeft="20dp"
+                android:backgroundTint="@color/colorWhite"/>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </androidx.cardview.widget.CardView>
+
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/cardview4"
+        android:layout_width="290dp"
+        android:layout_height="43dp"
+        android:background="@color/colorPrimary"
+        app:layout_constraintTop_toBottomOf="@id/cardview3"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        android:layout_marginTop="40dp"
+        app:cardCornerRadius="20dp"
+        android:elevation="50dp">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <ImageView
+                android:id="@+id/edit_text_box4"
+                android:layout_width="16dp"
+                android:layout_height="33dp"
+                android:src="@drawable/box"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                android:layout_marginLeft="40dp"/>
+
+            <EditText
+                android:id="@+id/et_patient_mobile"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:hint="Mobile Number"
+                app:layout_constraintLeft_toRightOf="@id/edit_text_box4"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                android:layout_marginLeft="20dp"
+                android:backgroundTint="@color/colorWhite"/>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </androidx.cardview.widget.CardView>
+    
+    
+    <Button
+        android:id="@+id/add_new_patient_button_form_screen"
+        android:layout_width="250dp"
+        android:layout_height="43dp"
+        app:layout_constraintTop_toBottomOf="@id/cardview4"
+        android:layout_marginTop="50dp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        android:text="add patient"
+        android:textColor="@color/colorWhite"
+        android:background="@drawable/round_bg_pink"/>
+
+
+
+
+
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
