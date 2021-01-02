@@ -6,17 +6,23 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
+import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.NavController
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.medchat.R
 import com.example.medchat.adapters.MessageListAdapter
-import com.example.medchat.viewModel.SharedMessageListAndPatientListViewModel
+import com.example.medchat.viewModel.SharedViewModel
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 
 
 class MessageListFragment : Fragment() {
+
+    private var viewModel : SharedViewModel?  = null
+    private var navController : NavController? = null
+    private val adapter : MessageListAdapter? = null
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -24,14 +30,19 @@ class MessageListFragment : Fragment() {
     ): View? {
         // Inflate the layout for this fragment
         val v = inflater.inflate(R.layout.fragment_message_list, container, false)
+        navController = findNavController()
 
-        val viewModel = ViewModelProvider(this).get(SharedMessageListAndPatientListViewModel::class.java)
+        viewModel = activity?.run {
+            ViewModelProvider(this)[SharedViewModel::class.java]
+        } ?: throw Exception("Invalid Activity")
 
-        val adapter = MessageListAdapter()
-        viewModel.allLastMessagesList.observe(viewLifecycleOwner,{
-            adapter.list = it
-            adapter.notifyDataSetChanged()
-        })
+        MessageListAdapter{
+            viewModel?.loadChatHistory(it.recieverId)
+            navController?.navigate(R.id.action_listFragment_to_chatFragment)
+
+        }
+
+        observeAndSetAdapterForChangesInList()  // this is for first time list setting also
 
         val linearLayoutManager = LinearLayoutManager(context,LinearLayoutManager.HORIZONTAL,false)
         val recyclerView = v.findViewById<RecyclerView>(R.id.recycler_list_lstMsg)
@@ -42,17 +53,24 @@ class MessageListFragment : Fragment() {
 
         val btnAddNewPatient = v.findViewById<ImageView>(R.id.add_new_patient_button_home_screen)
         btnAddNewPatient.setOnClickListener{
-            findNavController().navigate(R.id.action_listFragment_to_addNewPatient)
+            navController?.navigate(R.id.action_listFragment_to_addNewPatient)
         }
 
         val fabnewMessage = v.findViewById<FloatingActionButton>(R.id.fab_new_msg)
         fabnewMessage.setOnClickListener{
-            findNavController().navigate(R.id.action_listFragment_to_newMessage)
+            navController?.navigate(R.id.action_listFragment_to_newMessage)
         }
 
-
-
         return v
+    }
+
+    private fun observeAndSetAdapterForChangesInList() {
+
+        viewModel?.allLastMessagesList?.observe(viewLifecycleOwner,{
+            adapter?.list = it
+            adapter?.notifyDataSetChanged()
+        })
+
     }
 
 

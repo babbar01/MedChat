@@ -11,8 +11,8 @@ import androidx.room.PrimaryKey
     )]
 )
 data class Message(
-    @PrimaryKey(autoGenerate = true) val messageId: Int,
     val recieverId: Int,
     val message: String,
-    val timestamp: Long?  // because we will put this value in the function of dao not in viewmodel
+    val timestamp: Long?,  // because we will put this value in the function of dao not in viewmodel
+    @PrimaryKey(autoGenerate = true) val messageId: Int = 0
 )

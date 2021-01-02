@@ -16,7 +16,7 @@ import com.example.medchat.room.PatientRoomDatabase
 import kotlinx.android.synthetic.main.fragment_add_new_patient.*
 
 
-class addNewPatientFragment : Fragment() {
+class AddNewPatientFragment : Fragment() {
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,

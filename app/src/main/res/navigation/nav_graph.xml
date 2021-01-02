@@ -13,27 +13,33 @@
         <action
             android:id="@+id/action_listFragment_to_addNewPatient"
             app:destination="@id/addNewPatient"
-            app:enterAnim="@anim/fragment_open_enter"
-            app:exitAnim="@anim/fragment_open_exit" />
+            app:enterAnim="@anim/fade_in_from_right"
+            app:exitAnim="@anim/fade_out_to_left"
+            app:popEnterAnim="@anim/fade_in_from_left"
+            app:popExitAnim="@anim/fade_out_to_right" />
         <action
             android:id="@+id/action_listFragment_to_chatFragment"
             app:destination="@id/chatFragment"
-            app:enterAnim="@anim/fragment_open_enter"
-            app:exitAnim="@anim/fragment_open_exit" />
+            app:enterAnim="@anim/fade_in_from_right"
+            app:exitAnim="@anim/fade_out_to_left"
+            app:popEnterAnim="@anim/fade_in_from_left"
+            app:popExitAnim="@anim/fade_out_to_right" />
         <action
             android:id="@+id/action_listFragment_to_newMessage"
             app:destination="@id/newMessage"
-            app:enterAnim="@anim/fragment_open_enter"
-            app:exitAnim="@anim/fragment_open_exit" />
+            app:enterAnim="@anim/fade_in_from_right"
+            app:exitAnim="@anim/fade_out_to_left"
+            app:popEnterAnim="@anim/fade_in_from_left"
+            app:popExitAnim="@anim/fade_out_to_right" />
     </fragment>
     <fragment
         android:id="@+id/chatFragment"
-        android:name="com.example.medchat.ui.chatFragment"
+        android:name="com.example.medchat.ui.ChatFragment"
         android:label="fragment_chat"
         tools:layout="@layout/fragment_chat" />
     <fragment
         android:id="@+id/addNewPatient"
-        android:name="com.example.medchat.ui.addNewPatientFragment"
+        android:name="com.example.medchat.ui.AddNewPatientFragment"
         android:label="fragment_add_new_patient"
         tools:layout="@layout/fragment_add_new_patient" />
     <fragment
@@ -43,6 +49,10 @@
         tools:layout="@layout/fragment_new_message" >
         <action
             android:id="@+id/action_newMessage_to_chatFragment"
-            app:destination="@id/chatFragment" />
+            app:destination="@id/chatFragment"
+            app:enterAnim="@anim/fade_in_from_right"
+            app:exitAnim="@anim/fade_out_to_left"
+            app:popEnterAnim="@anim/fade_in_from_left"
+            app:popExitAnim="@anim/fade_out_to_right" />
     </fragment>
 </navigation>

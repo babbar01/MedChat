@@ -30,5 +30,8 @@ interface PatientDao {
     @Query("Select table2.recieverId,patient_table.patientName,table2.message,table2.time from patient_table join (Select recieverId,message,max(timestamp) as time from message_table group by recieverId) as table2")
     fun allLastMessagesList(): LiveData<List<LastMessage>>
 
+    @Query("Select * from message_table where recieverId = :patientId")
+    fun listChatHistory(patientId: Int) : LiveData<List<Message>>
+
 
 }

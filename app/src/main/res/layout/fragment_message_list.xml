@@ -23,6 +23,14 @@
             app:layout_constraintRight_toRightOf="parent"/>
 
         <ImageView
+            android:layout_width="800dp"
+            android:layout_height="300dp"
+            android:src="@drawable/ic_wave_3"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"/>
+
+        <ImageView
             android:layout_width="70dp"
             android:layout_height="70dp"
             android:src="@drawable/main_logo"
@@ -31,31 +39,17 @@
             app:layout_constraintRight_toRightOf="parent"
             android:layout_marginTop="20dp"/>
 
-    <ImageView
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        android:id="@+id/imageView_wave"
-        android:layout_width="800dp"
-        android:layout_height="300dp"
-        tools:src="@color/colorPrimary" />
-
-
-
-
-
-
-    <com.google.android.material.floatingactionbutton.FloatingActionButton
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent"
-        android:id="@+id/fab_new_msg"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:clickable="true"
-        android:src="@drawable/new_message_vector"
-        android:layout_marginRight="24dp"
-        android:layout_marginBottom="24dp"
-        android:background="@color/colorPrimary"/>
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            android:id="@+id/fab_new_msg"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:clickable="true"
+            android:src="@drawable/new_message_vector"
+            android:layout_marginRight="24dp"
+            android:layout_marginBottom="24dp"
+            android:background="@color/colorPrimary"/>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -63,7 +57,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:behavior_hideable="false"
-        app:behavior_peekHeight="440dp"
+        app:behavior_peekHeight="800dp"
         app:layout_behavior="com.google.android.material.bottomsheet.BottomSheetBehavior">
 
         <androidx.recyclerview.widget.RecyclerView
@@ -71,11 +65,6 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:padding="15dp"/>
-
-<!--        <ImageView-->
-<!--            android:layout_width="match_parent"-->
-<!--            android:layout_height="800dp"-->
-<!--            android:src="@drawable/round_bg_pink"/>-->
 
     </androidx.coordinatorlayout.widget.CoordinatorLayout>
 

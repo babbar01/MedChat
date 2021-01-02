@@ -20,4 +20,6 @@ class Repository(val patientdao : PatientDao) {
 
     fun allLastMessagesList() = patientdao.allLastMessagesList()
 
+    fun listChatHistory(patientId: Int) = patientdao.listChatHistory(patientId)
+
 }

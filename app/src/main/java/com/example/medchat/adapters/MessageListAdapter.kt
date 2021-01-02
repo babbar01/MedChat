@@ -8,7 +8,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.medchat.R
 import com.example.medchat.room.LastMessage
 
-class MessageListAdapter : RecyclerView.Adapter<MessageListAdapter.MessageViewHolder>() {
+class MessageListAdapter(private val onItemClickListener: (LastMessage) -> Unit) : RecyclerView.Adapter<MessageListAdapter.MessageViewHolder>() {
 
     var list: List<LastMessage> = emptyList()
 
@@ -25,10 +25,16 @@ class MessageListAdapter : RecyclerView.Adapter<MessageListAdapter.MessageViewHo
     }
 
     override fun onBindViewHolder(holder: MessageViewHolder, position: Int) {
-        holder.patientName.text = list[position].patientName
-        holder.lastMessage.text = list[position].message
+        val item = list[position]
+
+        holder.patientName.text = item.patientName
+        holder.lastMessage.text = item.message
         // TODO: 12/24/2020 change to proper date or time
-        holder.lastMessageTime.text = list[position].time.toString()
+        holder.lastMessageTime.text = item.time.toString()
+
+        holder.itemView.setOnClickListener{
+            onItemClickListener(item)
+        }
     }
 
     override fun getItemCount(): Int {

@@ -1,5 +1,6 @@
 package com.example.medchat.adapters
 
+import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -9,7 +10,8 @@ import com.example.medchat.R
 import com.example.medchat.room.Patient
 import com.example.medchat.room.PatientItem
 
-class PatientListAdapter : RecyclerView.Adapter<PatientListAdapter.MyViewHolder>() {
+class PatientListAdapter(private val onItemClickListener: (PatientItem) -> Unit) :
+    RecyclerView.Adapter<PatientListAdapter.MyViewHolder>() {
 
     var list: List<PatientItem> = emptyList()
 
@@ -24,7 +26,13 @@ class PatientListAdapter : RecyclerView.Adapter<PatientListAdapter.MyViewHolder>
     }
 
     override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
-        holder.patientName.text = list[position].patientName
+
+        val item = list[position]
+        holder.patientName.text = item.patientName
+
+        holder.itemView.setOnClickListener {
+            onItemClickListener(item)
+        }
 
     }
 
