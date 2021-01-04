@@ -4,6 +4,7 @@ import androidx.room.Entity
 import androidx.room.ForeignKey
 import androidx.room.PrimaryKey
 
+//todo see warning of compiler about foreign key in build tab
 @Entity(
     tableName = "message_table", foreignKeys = [ForeignKey(
         entity = Patient::class, parentColumns = ["patientId"],

@@ -1,15 +1,24 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/root_scrollview_chatFragment"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    tools:context=".ui.ChatFragment">
+    tools:context=".ui.ChatFragment"
+    android:scrollbars="none"
+    android:fillViewport="true"
+    android:fitsSystemWindows="true"
+    android:layout_alignParentBottom="true">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/chat_screen_top_panel"
         android:layout_width="match_parent"
-        android:layout_height="110dp"
+        android:layout_height="100dp"
         app:layout_constraintTop_toTopOf="parent"
         android:elevation="10dp"
         android:background="@color/colorWhite">
@@ -44,36 +53,43 @@
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        app:layout_constraintTop_toBottomOf="@id/chat_screen_top_panel"
-        app:layout_constraintBottom_toBottomOf="parent">
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            app:layout_constraintBottom_toTopOf="@+id/line_above_text_bar"
+            app:layout_constraintTop_toBottomOf="@id/chat_screen_top_panel">
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/reyclerview_chat_history"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintBottom_toTopOf="@id/line_above_text_bar">
-    </androidx.recyclerview.widget.RecyclerView>
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/reyclerview_chat_history"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_alignParentBottom="true"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"/>
 
-    <!-- A horizontal line between the chatbox and RecyclerView -->
-    <View
+        </RelativeLayout>
+
+        <!-- A horizontal line between the chatbox and RecyclerView -->
+
+        <View
         android:id="@+id/line_above_text_bar"
         android:layout_width="0dp"
         android:layout_height="2dp"
         android:background="#dfdfdf"
         android:layout_marginBottom="0dp"
-        app:layout_constraintBottom_toTopOf="@+id/layout_chatbox"
+        app:layout_constraintBottom_toTopOf="@id/layout_chatbox"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"/>
 
-    <LinearLayout
+
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_marginBottom="20dp"
+        app:layout_constraintBottom_toBottomOf="parent"
         android:id="@+id/layout_chatbox"
+        android:layout_width="match_parent"
+        android:layout_height="0dp">
+
+    <LinearLayout
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
@@ -110,6 +126,6 @@
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
-
-</androidx.constraintlayout.widget.ConstraintLayout>
+</ScrollView>

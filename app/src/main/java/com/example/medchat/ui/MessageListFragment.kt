@@ -1,12 +1,12 @@
 package com.example.medchat.ui
 
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
-import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.NavController
 import androidx.navigation.fragment.findNavController
@@ -22,7 +22,7 @@ class MessageListFragment : Fragment() {
 
     private var viewModel : SharedViewModel?  = null
     private var navController : NavController? = null
-    private val adapter : MessageListAdapter? = null
+    private var messageListAdapter : MessageListAdapter? = null
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -36,7 +36,7 @@ class MessageListFragment : Fragment() {
             ViewModelProvider(this)[SharedViewModel::class.java]
         } ?: throw Exception("Invalid Activity")
 
-        MessageListAdapter{
+        messageListAdapter = MessageListAdapter{
             viewModel?.loadChatHistory(it.recieverId)
             navController?.navigate(R.id.action_listFragment_to_chatFragment)
 
@@ -44,10 +44,10 @@ class MessageListFragment : Fragment() {
 
         observeAndSetAdapterForChangesInList()  // this is for first time list setting also
 
-        val linearLayoutManager = LinearLayoutManager(context,LinearLayoutManager.HORIZONTAL,false)
+        val linearLayoutManager = LinearLayoutManager(context,LinearLayoutManager.VERTICAL,false)
         val recyclerView = v.findViewById<RecyclerView>(R.id.recycler_list_lstMsg)
         recyclerView.apply {
-            this.adapter = adapter
+            this.adapter = messageListAdapter
             layoutManager = linearLayoutManager
         }
 
@@ -66,9 +66,11 @@ class MessageListFragment : Fragment() {
 
     private fun observeAndSetAdapterForChangesInList() {
 
-        viewModel?.allLastMessagesList?.observe(viewLifecycleOwner,{
-            adapter?.list = it
-            adapter?.notifyDataSetChanged()
+        viewModel?.allLastMessagesList?.observe(viewLifecycleOwner, {
+
+            Log.d(ChatFragment.TAG, "observeAndSetAdapterForChangesInList: ${it.size}")
+            messageListAdapter?.list = it
+            messageListAdapter?.notifyDataSetChanged()
         })
 
     }
