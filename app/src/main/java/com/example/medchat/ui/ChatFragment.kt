@@ -1,22 +1,19 @@
 package com.example.medchat.ui
 
 import android.graphics.Rect
-import android.os.Build
 import android.os.Bundle
 import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.view.WindowManager
 import android.widget.Button
 import android.widget.EditText
 import android.widget.ScrollView
-import androidx.annotation.RequiresApi
-import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.NavController
 import androidx.navigation.fragment.findNavController
+import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.medchat.R
 import com.example.medchat.adapters.ChatListAdapter
@@ -38,13 +35,6 @@ class ChatFragment : Fragment() {
     var recyclerView : RecyclerView? = null
     var chatListSize : Int = 0
 //    var chatboxLayout : ConstraintLayout? = null
-
-
-    override fun onResume() {
-//        activity?.window?.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_PAN);
-        super.onResume()
-    }
-
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -69,11 +59,14 @@ class ChatFragment : Fragment() {
             chatListSize = it.size
             chatListAdapter.list = it
             chatListAdapter.notifyDataSetChanged()
-            recyclerView?.scrollToPosition(chatListSize - 1)
         }
 
-
-        recyclerView?.adapter = chatListAdapter
+        val linearLayoutManager = LinearLayoutManager(context)
+        linearLayoutManager.stackFromEnd = true
+        recyclerView?.apply{
+            adapter = chatListAdapter
+            layoutManager = linearLayoutManager
+        }
 
         val etTypeMessage = v.findViewById<EditText>(R.id.edittext_chatbox)
         val btnSend = v.findViewById<Button>(R.id.button_chatbox_send)
@@ -110,8 +103,8 @@ class ChatFragment : Fragment() {
 
 
     private fun onKeyboardShow() {
+        Log.d(TAG, "onKeyboardShow: called")
         scrollView?.scrollToBottomWithoutFocusChange()
-        recyclerView?.scrollToPosition(chatListSize - 1)
     }
 
 
