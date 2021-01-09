@@ -27,7 +27,7 @@ interface PatientDao {
     fun deleteMessage(messageId: Int)
 
     // TODO: 12/23/2020 not right query yet
-    @Query("Select table2.recieverId,patient_table.patientName,table2.message,table2.time from patient_table join (Select recieverId,message,max(timestamp) as time from message_table group by recieverId) as table2")
+    @Query("Select table2.recieverId,patient_table.patientName,table2.message,table2.time from patient_table join (Select recieverId,message,max(timestamp) as time from message_table group by recieverId) as table2 where table2.recieverId = patient_table.patientId;")
     fun allLastMessagesList(): LiveData<List<LastMessage>>
 
     @Query("Select * from message_table where recieverId = :patientId")

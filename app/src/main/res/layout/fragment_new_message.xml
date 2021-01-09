@@ -47,8 +47,9 @@
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recycler_list_Patients_newMsgScreen"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="0dp"
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-        app:layout_constraintTop_toBottomOf="@id/topHeadingPanel"/>
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/topHeadingPanel" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

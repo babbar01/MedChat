@@ -23,7 +23,7 @@ abstract class PatientRoomDatabase : RoomDatabase() {
                 val instance = Room.databaseBuilder(
                     context.applicationContext,
                     PatientRoomDatabase::class.java,
-                    "word_database"
+                    "patient_database"
                 ).build()
                 INSTANCE = instance
                 // return instance

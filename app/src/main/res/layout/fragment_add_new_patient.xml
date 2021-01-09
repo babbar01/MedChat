@@ -59,9 +59,10 @@
 
             <EditText
                 android:id="@+id/et_patient_name"
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:hint="Name"
+                app:layout_constraintRight_toRightOf="parent"
                 app:layout_constraintLeft_toRightOf="@id/edit_text_box1"
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintBottom_toBottomOf="parent"
@@ -100,10 +101,11 @@
                 android:layout_marginLeft="40dp"/>
 
             <EditText
-                android:id="@+id/et_patient_age"
-                android:layout_width="wrap_content"
+                android:id="@+id/et_patient_address"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:hint="Age"
+                android:hint="Address"
+                app:layout_constraintRight_toRightOf="parent"
                 app:layout_constraintLeft_toRightOf="@id/edit_text_box2"
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintBottom_toBottomOf="parent"
@@ -142,10 +144,12 @@
                 android:layout_marginLeft="40dp"/>
 
             <EditText
-                android:id="@+id/et_patient_address"
-                android:layout_width="wrap_content"
+                android:id="@+id/et_patient_age"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:hint="Address"
+                android:hint="Age"
+                android:inputType="number"
+                app:layout_constraintRight_toRightOf="parent"
                 app:layout_constraintLeft_toRightOf="@id/edit_text_box3"
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintBottom_toBottomOf="parent"
@@ -185,9 +189,11 @@
 
             <EditText
                 android:id="@+id/et_patient_mobile"
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:hint="Mobile Number"
+                android:inputType="number"
+                app:layout_constraintRight_toRightOf="parent"
                 app:layout_constraintLeft_toRightOf="@id/edit_text_box4"
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintBottom_toBottomOf="parent"
