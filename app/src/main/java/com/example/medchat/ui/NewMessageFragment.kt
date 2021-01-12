@@ -29,7 +29,7 @@ class NewMessageFragment : Fragment() {
 
         val mAdapter = PatientListAdapter{
             sharedViewmodel.loadChatHistory(it.patientId)
-            Log.d(ChatFragment.TAG, "onCreateView of NewMessageFragment: ${sharedViewmodel.activeChatPatientId == null}")
+//            Log.d(ChatFragment.TAG, "onCreateView of NewMessageFragment: ${sharedViewmodel.activeChatPatientId == null}")
             findNavController().navigate(R.id.action_newMessage_to_chatFragment)
         }
 

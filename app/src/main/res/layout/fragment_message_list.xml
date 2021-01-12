@@ -43,9 +43,11 @@
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
+
     <androidx.coordinatorlayout.widget.CoordinatorLayout
         android:layout_width="match_parent"
-        android:layout_height="560dp"
+        android:layout_height="wrap_content"
+        android:minHeight="560dp"
         app:behavior_hideable="false"
         app:behavior_peekHeight="560dp"
         app:layout_behavior="com.google.android.material.bottomsheet.BottomSheetBehavior">

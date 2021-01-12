@@ -73,7 +73,7 @@ class ChatFragment : Fragment() {
 
         btnSend.setOnClickListener{
             Log.d(TAG, "onCreateView: hello ${viewModel?.activeChatPatientId == null}")
-            viewModel?.activeChatPatientId?.let {
+            viewModel?.activeIntChatPatientId?.let {
 
                 Log.d(TAG, "onCreateView: ${viewModel?.activeChatPatientId}")
 

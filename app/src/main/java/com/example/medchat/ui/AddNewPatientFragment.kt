@@ -7,13 +7,21 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.EditText
+import androidx.lifecycle.Lifecycle
+import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.lifecycleScope
+import androidx.lifecycle.viewModelScope
 import androidx.navigation.fragment.findNavController
 import com.example.medchat.R
 import com.example.medchat.hideKeyboard
 import com.example.medchat.repository.Repository
 import com.example.medchat.room.Patient
 import com.example.medchat.room.PatientRoomDatabase
+import com.example.medchat.viewModel.SharedViewModel
 import kotlinx.android.synthetic.main.fragment_add_new_patient.*
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 
 
 class AddNewPatientFragment : Fragment() {
@@ -30,6 +38,8 @@ class AddNewPatientFragment : Fragment() {
 //        val etAddress = v.findViewById<EditText>(R.id.et_patient_address)
 //        val etMobile = v.findViewById<EditText>(R.id.et_patient_mobile)
 
+        val viewmodelScope = ViewModelProvider(this)[SharedViewModel::class.java].viewModelScope
+
 
         val btnAddPatient = v.findViewById<Button>(R.id.add_new_patient_button_form_screen)
         btnAddPatient.setOnClickListener{
@@ -40,19 +50,27 @@ class AddNewPatientFragment : Fragment() {
 
             val newPatient = Patient(name,mobile,age,address)
 
-            val newThread = Thread{
-                container?.context?.let { it1 ->
-                    val dao = PatientRoomDatabase.getDatabase(it1).PatientDao()
+
+
+
+            viewmodelScope.launch{
+                withContext(Dispatchers.IO){
+                    container?.context?.let {
+                    val dao = PatientRoomDatabase.getDatabase(it).PatientDao()
                     val repo = Repository(dao)
 
                     repo.insertPatient(newPatient)
+                    }
                 }
+
+                if(lifecycle.currentState >= Lifecycle.State.STARTED) {
+                    hideKeyboard()
+                    findNavController().navigateUp()
+                }
+
+
             }
 
-            newThread.start()
-
-            hideKeyboard()
-            findNavController().navigateUp()
         }
 
 

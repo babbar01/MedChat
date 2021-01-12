@@ -1,25 +1,43 @@
 package com.example.medchat.repository
 
-import com.example.medchat.room.Message
-import com.example.medchat.room.Patient
-import com.example.medchat.room.PatientDao
+import android.util.Log
+import androidx.lifecycle.LiveData
+import com.example.medchat.room.*
+import com.example.medchat.ui.ChatFragment
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.withContext
 
 class Repository(val patientdao : PatientDao) {
 
-    fun insertPatient(patient : Patient) = patientdao.insertPatient(patient)
+    suspend fun insertPatient(patient : Patient) = patientdao.insertPatient(patient)
 
-    fun deletePatient(patientId : Int) = patientdao.deletePatient(patientId)
+    suspend fun deletePatient(patientId : Int) = patientdao.deletePatient(patientId)
 
-    fun allPatients() = patientdao.allPatients()
+    suspend fun allPatients() =
+         withContext(Dispatchers.IO){
+             Log.d(ChatFragment.TAG, "allPatientListOnThread: ${Thread.currentThread().name}")
+             patientdao.allPatients()
+        }
 
-    fun scanPatient(patientId: Int) = patientdao.scanPatient(patientId)
 
-    fun createMessage(message: Message) = patientdao.createMessage(message)
+    suspend fun scanPatient(patientId: Int) = patientdao.scanPatient(patientId)
 
-    fun deleteMessage(messageId : Int) = patientdao.deleteMessage(messageId)
+    suspend fun createMessage(message: Message) = patientdao.createMessage(message)
 
-    fun allLastMessagesList() = patientdao.allLastMessagesList()
+    suspend fun deleteMessage(messageId : Int) = patientdao.deleteMessage(messageId)
 
-    fun listChatHistory(patientId: Int) = patientdao.listChatHistory(patientId)
+    suspend fun allLastMessagesList() =
+         withContext(Dispatchers.IO){
+             Log.d(ChatFragment.TAG, "allLastMessagesListOnThread: ${Thread.currentThread().name}")
+             patientdao.allLastMessagesList()
+        }
+
+
+    suspend fun listChatHistory(patientId: Int) =
+        withContext(Dispatchers.IO){
+            Log.d(ChatFragment.TAG, "listChatHistoryOnThread: ${Thread.currentThread().name}")
+            patientdao.listChatHistory(patientId)
+        }
 
 }
