@@ -2,4 +2,6 @@
     <string name="app_name">MedChat</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name = "lorem">Lorem ipsum dolor sit a nulla porttitor massa. Pretium aenean pharetra magna ac placerat vestibulum lectus mauris ultrices. Euismod nisi porta lorem mollis.
+    </string>
 </resources>

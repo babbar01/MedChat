@@ -36,7 +36,15 @@
         android:id="@+id/chatFragment"
         android:name="com.example.medchat.ui.ChatFragment"
         android:label="fragment_chat"
-        tools:layout="@layout/fragment_chat" />
+        tools:layout="@layout/fragment_chat" >
+        <action
+            android:id="@+id/action_chatFragment_to_patientDetailFragment"
+            app:destination="@id/patientDetailFragment"
+            app:enterAnim="@anim/fade_in_from_right"
+            app:exitAnim="@anim/fade_out_to_left"
+            app:popEnterAnim="@anim/fade_in_from_left"
+            app:popExitAnim="@anim/fade_out_to_right" />
+    </fragment>
     <fragment
         android:id="@+id/addNewPatient"
         android:name="com.example.medchat.ui.AddNewPatientFragment"
@@ -55,4 +63,9 @@
             app:popEnterAnim="@anim/fade_in_from_left"
             app:popExitAnim="@anim/fade_out_to_right" />
     </fragment>
+    <fragment
+        android:id="@+id/patientDetailFragment"
+        android:name="com.example.medchat.ui.PatientDetailFragment"
+        android:label="fragment_patient_detail"
+        tools:layout="@layout/fragment_patient_detail" />
 </navigation>

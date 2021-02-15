@@ -1,12 +1,16 @@
 package com.example.medchat.adapters
 
+import android.os.Build
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
+import androidx.annotation.RequiresApi
 import androidx.recyclerview.widget.RecyclerView
 import com.example.medchat.R
 import com.example.medchat.room.LastMessage
+import java.text.SimpleDateFormat
+import java.util.*
 
 class MessageListAdapter(private val onItemClickListener: (LastMessage) -> Unit) : RecyclerView.Adapter<MessageListAdapter.MessageViewHolder>() {
 
@@ -24,13 +28,33 @@ class MessageListAdapter(private val onItemClickListener: (LastMessage) -> Unit)
         return MessageViewHolder(v)
     }
 
+    @RequiresApi(Build.VERSION_CODES.O)
     override fun onBindViewHolder(holder: MessageViewHolder, position: Int) {
         val item = list[position]
 
         holder.patientName.text = item.patientName
         holder.lastMessage.text = item.message
-        // TODO: 12/24/2020 change to proper date or time
-        holder.lastMessageTime.text = item.time.toString()
+
+        val datetime = Date(item.time)
+        val formatter = if(!isDateToday(item.time))
+        {
+            SimpleDateFormat("dd/MM/yyyy", Locale.US)
+        } else {
+            SimpleDateFormat("hh:mm aa", Locale.US)
+        }
+        val dateString = formatter.format(datetime)
+
+        holder.lastMessageTime.text = dateString
+
+        // JAVA 8 style
+//        val date : LocalDate = Instant.ofEpochMilli(item.time)
+//            .atZone(ZoneId.systemDefault())
+//            .toLocalDate()
+//
+//        val formatter: DateTimeFormatter = DateTimeFormatter.ofPattern("dd-MM-yyyy")
+//        val formattedDate: String = now.format(formatter)
+
+
 
         holder.itemView.setOnClickListener{
             onItemClickListener(item)
@@ -39,5 +63,17 @@ class MessageListAdapter(private val onItemClickListener: (LastMessage) -> Unit)
 
     override fun getItemCount(): Int {
         return list.size
+    }
+
+    fun isDateToday(milliSeconds: Long): Boolean {
+        val calendar = Calendar.getInstance()
+        calendar.timeInMillis = milliSeconds
+        val getDate = calendar.time
+        calendar.timeInMillis = System.currentTimeMillis()
+        calendar[Calendar.HOUR_OF_DAY] = 0
+        calendar[Calendar.MINUTE] = 0
+        calendar[Calendar.SECOND] = 0
+        val startDate = calendar.time
+        return getDate > startDate
     }
 }

@@ -56,9 +56,8 @@
             android:id="@+id/card_bottomsheet"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            app:cardBackgroundColor="@color/colorWhite"
-            app:cardCornerRadius="20dp"
-            app:cardElevation="20dp">
+            app:cardBackgroundColor="@android:color/background_light"
+            app:cardCornerRadius="20dp">
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/recycler_list_lstMsg"

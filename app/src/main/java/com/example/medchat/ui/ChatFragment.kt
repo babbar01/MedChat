@@ -10,6 +10,7 @@ import android.view.ViewGroup
 import android.widget.Button
 import android.widget.EditText
 import android.widget.ScrollView
+import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.NavController
 import androidx.navigation.fragment.findNavController
@@ -20,6 +21,7 @@ import com.example.medchat.adapters.ChatListAdapter
 import com.example.medchat.room.Message
 import com.example.medchat.scrollToBottomWithoutFocusChange
 import com.example.medchat.viewModel.SharedViewModel
+import kotlinx.android.synthetic.main.fragment_chat.*
 import kotlin.math.abs
 
 
@@ -34,7 +36,6 @@ class ChatFragment : Fragment() {
     var scrollView : ScrollView? = null
     var recyclerView : RecyclerView? = null
     var chatListSize : Int = 0
-//    var chatboxLayout : ConstraintLayout? = null
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -61,6 +62,10 @@ class ChatFragment : Fragment() {
             chatListAdapter.notifyDataSetChanged()
         }
 
+        viewModel?.activeChatPatientName?.observe(viewLifecycleOwner){
+            txt_active_chat_patient_name.text = it
+        }
+
         val linearLayoutManager = LinearLayoutManager(context)
         linearLayoutManager.stackFromEnd = true
         recyclerView?.apply{
@@ -83,6 +88,11 @@ class ChatFragment : Fragment() {
                 val newMessage = Message(it,messageBody,System.currentTimeMillis())
                 viewModel?.insertMessage(newMessage)
             }
+        }
+
+        val chat_screen_top_panel = v.findViewById<ConstraintLayout>(R.id.chat_screen_top_panel)
+        chat_screen_top_panel.setOnClickListener{
+            navController?.navigate(R.id.action_chatFragment_to_patientDetailFragment)
         }
 
         return v

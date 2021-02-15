@@ -16,6 +16,7 @@
         android:layout_height="match_parent">
 
     <androidx.constraintlayout.widget.ConstraintLayout
+        android:clickable="true"
         android:id="@+id/chat_screen_top_panel"
         android:layout_width="match_parent"
         android:layout_height="100dp"
@@ -41,6 +42,8 @@
             app:layout_constraintTop_toTopOf="parent"/>
 
         <TextView
+            android:gravity="center_horizontal"
+            android:id="@+id/txt_active_chat_patient_name"
             android:layout_width="157dp"
             android:layout_height="32dp"
             android:text="Patient Name"

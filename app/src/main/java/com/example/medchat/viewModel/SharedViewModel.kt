@@ -33,8 +33,14 @@ class SharedViewModel(application: Application) : AndroidViewModel(application) 
 
     val activeChatHistory : LiveData<List<Message>> =
         activeChatPatientId.switchMap { value ->
-        liveData { emitSource(repository.listChatHistory(value)) }
+            liveData { emitSource(repository.listChatHistory(value)) }
+        }
+
+    val activeChatPatientDetails = activeChatPatientId.switchMap {
+        liveData { emitSource(repository.returnPatient(it)) }
     }
+
+    val activeChatPatientName = activeChatPatientDetails.map{it.patientName}
 
     fun loadChatHistory(patientId : Int){
         activeChatPatientId.value = patientId

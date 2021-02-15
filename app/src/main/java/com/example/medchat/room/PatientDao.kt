@@ -17,7 +17,7 @@ interface PatientDao {
     fun allPatients(): LiveData<List<PatientItem>>
 
     @Query("Select * from patient_table where patientId = :patientId")
-    suspend fun scanPatient(patientId: Int): Patient
+    fun returnPatient(patientId: Int): LiveData<Patient>
 
     // messages queries
 

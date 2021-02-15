@@ -21,7 +21,7 @@ class Repository(val patientdao : PatientDao) {
         }
 
 
-    suspend fun scanPatient(patientId: Int) = patientdao.scanPatient(patientId)
+    suspend fun returnPatient(patientId: Int) = withContext(Dispatchers.IO){patientdao.returnPatient(patientId)}
 
     suspend fun createMessage(message: Message) = patientdao.createMessage(message)
 

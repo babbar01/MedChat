@@ -7,6 +7,8 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.medchat.R
 import com.example.medchat.room.Message
+import java.text.SimpleDateFormat
+import java.util.*
 
 class ChatListAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
@@ -20,7 +22,20 @@ class ChatListAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
         fun bind(item : Message){
             messageBody.text = item.message
-            messageTime.text = item.timestamp.toString()
+
+            item.timestamp?.let{
+                val datetime = Date(it)
+                val formatter =
+                    if (!isDateToday(it))
+                    {
+                        SimpleDateFormat("dd/MM/yyyy", Locale.US)
+                    } else {
+                        SimpleDateFormat("hh:mm aa", Locale.US)
+                    }
+                val dateString = formatter.format(datetime)
+
+                messageTime.text = dateString
+            }
         }
 
     }
@@ -38,6 +53,18 @@ class ChatListAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
     override fun getItemCount(): Int {
        return list.size
+    }
+
+    fun isDateToday(milliSeconds: Long): Boolean {
+        val calendar = Calendar.getInstance()
+        calendar.timeInMillis = milliSeconds
+        val getDate = calendar.time
+        calendar.timeInMillis = System.currentTimeMillis()
+        calendar[Calendar.HOUR_OF_DAY] = 0
+        calendar[Calendar.MINUTE] = 0
+        calendar[Calendar.SECOND] = 0
+        val startDate = calendar.time
+        return getDate > startDate
     }
 
 
