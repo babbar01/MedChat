@@ -9,7 +9,9 @@ data class Patient(
     val mobile: Long,
     val age: Int,
     val address: String,
+    val createdAt : Long,
     val problem: String = "",
+    val bloodGroup : String? = null,
     @PrimaryKey(autoGenerate = true) val patientId: Int = 0
 )
 

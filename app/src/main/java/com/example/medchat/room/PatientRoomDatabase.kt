@@ -5,8 +5,7 @@ import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
 
-// Annotates class to be a Room Database with a table (entity) of the Word class
-@Database(entities = [Patient::class, Message::class], version = 1, exportSchema = false)
+@Database(entities = [Patient::class, Message::class], version = 2, exportSchema = false)
 abstract class PatientRoomDatabase : RoomDatabase() {
 
     abstract fun PatientDao(): PatientDao
@@ -23,7 +22,10 @@ abstract class PatientRoomDatabase : RoomDatabase() {
                 val instance = Room.databaseBuilder(
                     context.applicationContext,
                     PatientRoomDatabase::class.java,
-                    "patient_database"
+                    "patients_database"    /*
+    we changed its name because we hadn't studied migration yet so as to cope up up with change in scheme of patient table
+    but not recommended because we will lose all of our data
+    */
                 ).build()
                 INSTANCE = instance
                 // return instance

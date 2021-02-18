@@ -48,7 +48,7 @@ class AddNewPatientFragment : Fragment() {
             val address = et_patient_address.text.toString()
             val mobile = et_patient_mobile.text.toString().toLong()
 
-            val newPatient = Patient(name,mobile,age,address)
+            val newPatient = Patient(name,mobile,age,address,System.currentTimeMillis())
 
 
 

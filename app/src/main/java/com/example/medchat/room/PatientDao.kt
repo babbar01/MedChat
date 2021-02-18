@@ -13,7 +13,7 @@ interface PatientDao {
     @Query("Delete from patient_table where patientId = :patientId")
     suspend fun deletePatient(patientId: Int)
 
-    @Query("Select patientId,patientName from patient_table")
+    @Query("Select patientId,patientName from patient_table order by createdAt desc")
     fun allPatients(): LiveData<List<PatientItem>>
 
     @Query("Select * from patient_table where patientId = :patientId")
@@ -27,7 +27,7 @@ interface PatientDao {
     @Query("Delete from message_table where messageId = :messageId")
     suspend fun deleteMessage(messageId: Int)
 
-    @Query("Select table2.recieverId,patient_table.patientName,table2.message,table2.time from patient_table join (Select recieverId,message,max(timestamp) as time from message_table group by recieverId) as table2 where table2.recieverId = patient_table.patientId;")
+    @Query("Select table2.recieverId,patient_table.patientName,table2.message,table2.time from patient_table join (Select recieverId,message,max(timestamp) as time from message_table group by recieverId) as table2 where table2.recieverId = patient_table.patientId order by table2.time desc;")
     fun allLastMessagesList(): LiveData<List<LastMessage>>
 
     @Query("Select * from message_table where recieverId = :patientId")
