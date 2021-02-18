@@ -18,7 +18,6 @@ class SharedViewModel(application: Application) : AndroidViewModel(application) 
 
     // todo can use flow instead of livedata
 
-
     private val dao = PatientRoomDatabase.getDatabase(application).PatientDao()
 
     private val repository = Repository(dao)
@@ -26,6 +25,32 @@ class SharedViewModel(application: Application) : AndroidViewModel(application) 
     val allLastMessagesList: LiveData<List<LastMessage>>  = liveData{emitSource(repository.allLastMessagesList())}
 
     val allPatientList : LiveData<List<PatientItem>>  = liveData { emitSource(repository.allPatients()) }
+
+    val activeSearchQuery  = MutableLiveData<String>()
+    /* is updated every time search query changes and initially set to ""(empty) in
+     onCreate of NewMessageFragment */
+
+    val filteredPatientList : LiveData<List<PatientItem>> =
+        activeSearchQuery.switchMap {charString->
+        allPatientList.map {
+            var patientListFiltered : MutableList<PatientItem>
+
+            if (charString.isNullOrEmpty()) patientListFiltered = it as MutableList<PatientItem>
+            else{
+                patientListFiltered = mutableListOf()
+
+                for (patientrow in it){
+                    if (patientrow.patientName.toLowerCase().contains(charString.toLowerCase())
+                        || patientrow.patientId.toString().contains(charString))
+                        patientListFiltered.add(patientrow)
+                }
+            }
+            // last line is returned
+            patientListFiltered
+        }
+    }
+
+
 
 
     val activeChatPatientId = MutableLiveData<Int>()
