@@ -1,18 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/root_layout_newmessagefragment"
     xmlns:tools="http://schemas.android.com/tools"
-    android:focusable="true"
-    android:focusableInTouchMode="true"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    tools:context=".ui.NewMessageFragment">
+    tools:context=".TimelineViewFragment">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/topHeadingPanel"
         android:layout_width="match_parent"
-        android:layout_height="110dp"
+        android:layout_height="130dp"
         app:layout_constraintTop_toTopOf="parent"
         android:elevation="10dp"
         android:background="@color/colorWhite">
@@ -37,7 +34,7 @@
         <TextView
             android:layout_width="157dp"
             android:layout_height="32dp"
-            android:text="Patient List"
+            android:text="TimeLineView"
             android:textSize="24dp"
             android:textColor="@color/colorText"
             app:layout_constraintTop_toTopOf="parent"
@@ -45,26 +42,39 @@
             android:layout_marginTop="35dp"
             app:layout_constraintRight_toRightOf="parent"/>
 
-        <SearchView
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintBottom_toBottomOf="parent"
-            android:layout_marginLeft="50dp"
-            android:layout_marginRight="60dp"
+        <com.google.android.material.tabs.TabLayout
+            android:id="@+id/tab_layout_timelineview"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/patient_searchview"
-            android:queryBackground="@color/colorWhite"
-            android:layoutDirection="rtl" />
+            app:tabInlineLabel="true"
+            app:tabIndicatorColor="@color/colorPrimary"
+            app:tabRippleColor="@color/colorPrimary"
+            app:layout_constraintBottom_toBottomOf="parent">
+
+            <com.google.android.material.tabs.TabItem
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/txt_tab_history"
+                android:icon="@drawable/ic_history"/>
+
+            <com.google.android.material.tabs.TabItem
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/txt_tab_add_record"
+                android:icon="@drawable/ic_add_record"/>
+        </com.google.android.material.tabs.TabLayout>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:layout_marginTop="15dp"
-        android:id="@+id/recycler_list_Patients_newMsgScreen"
+    <fragment
+        android:id="@+id/timelineview_navhost_fragment"
+        android:name="androidx.navigation.fragment.NavHostFragment"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+        app:defaultNavHost="true"
+        app:navGraph="@navigation/timelineview_tab_nav_graph"
+        app:layout_constraintTop_toBottomOf="@id/topHeadingPanel"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/topHeadingPanel" />
+        />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

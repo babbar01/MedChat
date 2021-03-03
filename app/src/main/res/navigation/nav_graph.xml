@@ -67,5 +67,18 @@
         android:id="@+id/patientDetailFragment"
         android:name="com.example.medchat.ui.PatientDetailFragment"
         android:label="fragment_patient_detail"
-        tools:layout="@layout/fragment_patient_detail" />
+        tools:layout="@layout/fragment_patient_detail" >
+        <action
+            android:id="@+id/action_patientDetailFragment_to_timelineViewFragment"
+            app:destination="@id/timelineViewFragment"
+            app:enterAnim="@anim/fade_in_from_right"
+            app:exitAnim="@anim/fade_out_to_left"
+            app:popEnterAnim="@anim/fade_in_from_left"
+            app:popExitAnim="@anim/fade_out_to_right" />
+    </fragment>
+    <fragment
+        android:id="@+id/timelineViewFragment"
+        android:name="com.example.medchat.ui.TimelineViewFragment"
+        android:label="fragment_timeline_view"
+        tools:layout="@layout/fragment_timeline_view" />
 </navigation>
