@@ -12,22 +12,34 @@
             android:fitsSystemWindows="true"
             android:theme="@style/Theme.AppCompat.Light.DarkActionBar">
 
-<!--            todo add title of app bar in kotlin-->
             <com.google.android.material.appbar.CollapsingToolbarLayout
+                android:id="@+id/collapsing_toolbar_patientDetailFragment"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:fitsSystemWindows="true"
                 app:layout_scrollFlags="exitUntilCollapsed|scroll|snap"
-                app:contentScrim="@color/colorPrimary">
+                app:contentScrim="@color/colorWhite"
+                app:titleEnabled="true"
+                app:title="Patient Name"
+                app:expandedTitleMarginBottom="10dp"
+                app:expandedTitleMarginStart="10dp">
 
-                <ImageView
+                <androidx.constraintlayout.widget.ConstraintLayout
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:src="@drawable/ic_launcher_background"
-                    android:scaleType="centerCrop"
-                    android:fitsSystemWindows="true"/>
+                    android:layout_height="match_parent">
+
+                    <ImageView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:src="@drawable/ic_launcher_background"
+                        android:scaleType="centerCrop"
+                        android:fitsSystemWindows="true"/>
+
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
 
                 <com.google.android.material.appbar.MaterialToolbar
+                    android:id="@+id/action_bar_patientDetailFragment"
                     android:layout_width="match_parent"
                     android:layout_height="?attr/actionBarSize"
                     android:background="@android:color/transparent"
@@ -40,6 +52,7 @@
 
 
     <androidx.core.widget.NestedScrollView
+        android:background="@color/colorlightgreyBackground"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         app:layout_behavior="com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior">
@@ -50,7 +63,6 @@
 
             <androidx.cardview.widget.CardView
                 android:id="@+id/cardview_problem"
-                android:layout_marginTop="30dp"
                 android:padding="10dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -100,7 +112,7 @@
 
             <androidx.cardview.widget.CardView
                 android:id="@+id/cardview_age_adress_contact"
-                android:layout_marginTop="30dp"
+                android:layout_marginTop="10dp"
                 android:padding="10dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -205,7 +217,7 @@
 
             <androidx.cardview.widget.CardView
                 android:id="@+id/cardview_blood_group"
-                android:layout_marginTop="30dp"
+                android:layout_marginTop="10dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 app:layout_constraintTop_toBottomOf="@id/cardview_age_adress_contact">
@@ -243,29 +255,28 @@
 
             </androidx.cardview.widget.CardView>
 
-            <TextView
-                android:layout_marginLeft="20dp"
-                android:layout_marginTop="30dp"
-                android:id="@+id/txt_click_to_know_history"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Click to know history"
-                android:textColor="@color/colorText"
-                android:textSize="20dp"
-                app:layout_constraintLeft_toLeftOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/cardview_blood_group"/>
-
             <androidx.cardview.widget.CardView
+                android:clickable="true"
+                android:layout_marginTop="10dp"
                 android:id="@+id/cardview_blood_pressure_sugar_etc"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                app:layout_constraintTop_toBottomOf="@id/txt_click_to_know_history">
+                app:layout_constraintTop_toBottomOf="@id/cardview_blood_group">
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:background="@color/colorAccent"
                     android:orientation="vertical">
+
+                    <TextView
+                        android:gravity="center_horizontal"
+                        android:layout_marginTop="10dp"
+                        android:id="@+id/txt_click_to_know_history"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Click to know history"
+                        android:textColor="@color/colorBlack"
+                        android:textSize="18dp" />
 
                 <LinearLayout
                     android:id="@+id/linear_layout_blood_pressure"
@@ -277,25 +288,31 @@
 
                     <TextView
                         android:layout_marginRight="50dp"
-                        android:layout_marginTop="10dp"
                         android:layout_width="180dp"
                         android:layout_height="wrap_content"
                         android:text="Blood Pressure"
-                        android:textColor="@color/colorWhite"
+                        android:textColor="@color/colorPrimary"
                         android:textSize="25dp"
                         android:textStyle="bold"
                         android:layout_marginLeft="15dp"/>
 
                     <TextView
-                        android:layout_marginTop="10dp"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="Contact"
-                        android:textColor="@color/colorWhite"
+                        android:textColor="@color/colorText"
                         android:textSize="20dp"
                         android:layout_marginLeft="15dp"/>
 
                 </LinearLayout>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="0.5dp"
+                    android:background="@color/colorLightGrey"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    android:layout_marginRight="30dp"
+                    android:layout_marginLeft="30dp" />
 
                 <LinearLayout
                     android:id="@+id/linear_layout_blood_sugar"
@@ -311,7 +328,7 @@
                         android:layout_width="180dp"
                         android:layout_height="wrap_content"
                         android:text="Blood Sugar"
-                        android:textColor="@color/colorWhite"
+                        android:textColor="@color/colorPrimary"
                         android:textSize="25dp"
                         android:textStyle="bold"
                         android:layout_marginLeft="15dp"/>
@@ -321,11 +338,19 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="Contact"
-                        android:textColor="@color/colorWhite"
+                        android:textColor="@color/colorText"
                         android:textSize="20dp"
                         android:layout_marginLeft="15dp"/>
 
                 </LinearLayout>
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="0.5dp"
+                        android:background="@color/colorLightGrey"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        android:layout_marginRight="30dp"
+                        android:layout_marginLeft="30dp" />
 
                 <LinearLayout
                     android:layout_gravity="center_vertical"
@@ -340,7 +365,7 @@
                         android:layout_width="180dp"
                         android:layout_height="wrap_content"
                         android:text="Allergy"
-                        android:textColor="@color/colorWhite"
+                        android:textColor="@color/colorPrimary"
                         android:textSize="25dp"
                         android:textStyle="bold"
                         android:layout_marginLeft="15dp"/>
@@ -350,11 +375,19 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="Contact"
-                        android:textColor="@color/colorWhite"
+                        android:textColor="@color/colorText"
                         android:textSize="20dp"
                         android:layout_marginLeft="15dp"/>
 
                 </LinearLayout>
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="0.5dp"
+                        android:background="@color/colorLightGrey"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        android:layout_marginRight="30dp"
+                        android:layout_marginLeft="30dp" />
 
                 <LinearLayout
                     android:layout_gravity="center_vertical"
@@ -369,7 +402,7 @@
                         android:layout_width="180dp"
                         android:layout_height="wrap_content"
                         android:text="Vaccines"
-                        android:textColor="@color/colorWhite"
+                        android:textColor="@color/colorPrimary"
                         android:textSize="25dp"
                         android:textStyle="bold"
                         android:layout_marginLeft="15dp"/>
@@ -379,7 +412,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="Contact"
-                        android:textColor="@color/colorWhite"
+                        android:textColor="@color/colorText"
                         android:textSize="20dp"
                         android:layout_marginLeft="15dp"/>
 
@@ -391,7 +424,7 @@
 
             <androidx.cardview.widget.CardView
                 android:id="@+id/cardview_created_at"
-                android:layout_marginTop="30dp"
+                android:layout_marginTop="10dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 app:layout_constraintTop_toBottomOf="@id/cardview_blood_pressure_sugar_etc"
@@ -400,7 +433,6 @@
 
 
                 <LinearLayout
-                    android:background="@color/colorPrimary"
                     android:padding="10dp"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -412,7 +444,7 @@
                         android:layout_width="150dp"
                         android:layout_height="wrap_content"
                         android:text="Created at"
-                        android:textColor="@color/colorWhite"
+                        android:textColor="@color/colorBlack"
                         android:textSize="25dp"
                         android:textStyle="bold"
                         android:layout_marginLeft="15dp"/>
@@ -422,7 +454,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="Contact"
-                        android:textColor="@color/colorWhite"
+                        android:textColor="@color/colorBlack"
                         android:textSize="20dp"
                         android:layout_marginLeft="15dp"/>
 
