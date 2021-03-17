@@ -30,6 +30,8 @@ android {
 dependencies {
     implementation "androidx.appcompat:appcompat:$rootProject.appCompatVersion"
 
+    implementation 'com.github.vipulasri:timelineview:1.1.5'
+
     // Dependencies for working with Architecture components
     // You'll probably have to update the version numbers in build.gradle (Project)
 

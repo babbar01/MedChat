@@ -20,7 +20,8 @@
             android:elevation="20dp"
             android:src="@drawable/ic_add_patient"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintRight_toRightOf="parent"/>
+            app:layout_constraintRight_toRightOf="parent"
+            android:foreground="?android:attr/selectableItemBackground"/>
 
         <ImageView
             android:layout_width="800dp"

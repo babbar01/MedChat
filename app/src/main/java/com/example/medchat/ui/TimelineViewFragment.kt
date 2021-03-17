@@ -6,11 +6,15 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
+import android.widget.TextView
 import androidx.fragment.app.FragmentActivity
 import androidx.fragment.app.FragmentManager
+import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.fragment.findNavController
 import com.example.medchat.R
+import com.example.medchat.viewModel.SharedViewModel
 import com.google.android.material.tabs.TabLayout
 
 
@@ -22,6 +26,10 @@ class TimelineViewFragment : Fragment() {
     ): View? {
         // Inflate the layout for this fragment
         val v = inflater.inflate(R.layout.fragment_timeline_view, container, false)
+
+        val sharedViewModel = activity?.run {
+            ViewModelProvider(this)[SharedViewModel::class.java]
+        } ?: throw Exception("Invalid Activity")
 
         /* we will use getChildFragmentManager() Return a private FragmentManager for placing and
         managing Fragments inside of this Fragment. */
@@ -46,6 +54,20 @@ class TimelineViewFragment : Fragment() {
             }
 
         })
+
+        val backButton = v.findViewById<ImageView>(R.id.back_btn_timelineView)
+        backButton.setOnClickListener{
+            findNavController().navigateUp()
+        }
+
+        val title = v.findViewById<TextView>(R.id.title_timelineView)
+        title.text = when(sharedViewModel.activeRecord){
+            0 -> "Blood Pressure"
+            1 -> "Blood Sugar"
+            2 -> "Allergy"
+            3 -> "Vaccine"
+            else -> "TimeLineView"
+        }
 
         return v
     }

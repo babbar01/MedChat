@@ -25,13 +25,15 @@
         android:background="@color/colorWhite">
 
         <ImageView
+            android:id="@+id/back_btn_chatViewFragment"
             android:layout_width="25dp"
             android:layout_height="50dp"
-            android:src="@drawable/box_black"
+            android:src="@drawable/ic_back"
             app:layout_constraintLeft_toLeftOf="parent"
             android:layout_marginTop="25dp"
             android:layout_marginLeft="20dp"
-            app:layout_constraintTop_toTopOf="parent"/>
+            app:layout_constraintTop_toTopOf="parent"
+            android:foreground="?android:attr/selectableItemBackground" />
 
         <ImageView
             android:layout_width="67dp"

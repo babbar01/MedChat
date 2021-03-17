@@ -1,26 +1,27 @@
 package com.example.medchat.viewModel
 
 import android.app.Application
-import android.util.Log
+import android.widget.Toast
 import androidx.lifecycle.*
 import com.example.medchat.repository.Repository
-import com.example.medchat.room.LastMessage
-import com.example.medchat.room.Message
-import com.example.medchat.room.PatientItem
-import com.example.medchat.room.PatientRoomDatabase
-import com.example.medchat.ui.ChatFragment
+import com.example.medchat.room.*
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.async
-import kotlinx.coroutines.flow.onStart
 import kotlinx.coroutines.launch
+import kotlin.coroutines.coroutineContext
 
 class SharedViewModel(application: Application) : AndroidViewModel(application) {
 
     // todo can use flow instead of livedata
 
-    private val dao = PatientRoomDatabase.getDatabase(application).PatientDao()
+    private val patientRoomDatabase = PatientRoomDatabase.getDatabase(application)
+    private val patientDao = patientRoomDatabase.PatientDao()
+    private val bpDao = patientRoomDatabase.BpDao()
+    private val bloodSugarDao = patientRoomDatabase.BloodSugarDao()
+    private val allergyDao = patientRoomDatabase.AllergyDao()
+    private val vaccineDao = patientRoomDatabase.VaccineDao()
 
-    private val repository = Repository(dao)
+
+    private val repository = Repository(patientDao,bpDao,bloodSugarDao,allergyDao,vaccineDao)
 
     val allLastMessagesList: LiveData<List<LastMessage>>  = liveData{emitSource(repository.allLastMessagesList())}
 
@@ -77,4 +78,50 @@ class SharedViewModel(application: Application) : AndroidViewModel(application) 
         viewModelScope.launch(Dispatchers.IO) { repository.createMessage(message) }
 
     }
+
+    fun insertPatient(newPatient : Patient){
+        viewModelScope.launch(Dispatchers.IO){ repository.insertPatient(newPatient)}
+    }
+
+    var activeRecord : Int = 0   // 0 for bp, 1 for sugar and like this...
+
+    fun insertBpRecord(bpRecord: BpRecord){
+        viewModelScope.launch(Dispatchers.IO){ repository.insertBpRecord(bpRecord)}
+    }
+
+    var activePatientBloodPressureHistory = activeChatPatientId.switchMap {
+        liveData { emitSource(repository.bpHistory(it)) }
+    }
+
+    //
+
+    fun insertBloodSugarRecord(bloodSugarRecord: BloodSugarRecord){
+        viewModelScope.launch(Dispatchers.IO){ repository.insertBloodSugarRecord(bloodSugarRecord)}
+    }
+
+    var activePatientBloodSugarHistory = activeChatPatientId.switchMap {
+        liveData { emitSource(repository.bloodSugarHistory(it)) }
+    }
+
+    //
+
+    fun insertAllergyRecord(allergyRecord: AllergyRecord){
+        viewModelScope.launch(Dispatchers.IO){ repository.insertAllergyRecord(allergyRecord)}
+    }
+
+    var activePatientAllergyHistory = activeChatPatientId.switchMap {
+        liveData { emitSource(repository.allergyHistory(it)) }
+    }
+
+    //
+
+    fun insertVaccineRecord(vaccineRecord: VaccineRecord){
+        viewModelScope.launch(Dispatchers.IO){ repository.insertVaccineRecord(vaccineRecord)}
+    }
+
+    var activePatientVaccineHistory = activeChatPatientId.switchMap {
+        liveData { emitSource(repository.vaccineHistory(it)) }
+    }
+
+
 }

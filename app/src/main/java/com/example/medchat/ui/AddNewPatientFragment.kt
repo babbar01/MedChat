@@ -38,7 +38,7 @@ class AddNewPatientFragment : Fragment() {
 //        val etAddress = v.findViewById<EditText>(R.id.et_patient_address)
 //        val etMobile = v.findViewById<EditText>(R.id.et_patient_mobile)
 
-        val viewmodelScope = ViewModelProvider(this)[SharedViewModel::class.java].viewModelScope
+        val sharedViewModel = ViewModelProvider(this)[SharedViewModel::class.java]
 
 
         val btnAddPatient = v.findViewById<Button>(R.id.add_new_patient_button_form_screen)
@@ -50,18 +50,7 @@ class AddNewPatientFragment : Fragment() {
 
             val newPatient = Patient(name,mobile,age,address,System.currentTimeMillis())
 
-
-
-
-            viewmodelScope.launch{
-                withContext(Dispatchers.IO){
-                    container?.context?.let {
-                    val dao = PatientRoomDatabase.getDatabase(it).PatientDao()
-                    val repo = Repository(dao)
-
-                    repo.insertPatient(newPatient)
-                    }
-                }
+            sharedViewModel.insertPatient(newPatient)
 
                 if(lifecycle.currentState >= Lifecycle.State.STARTED) {
                     hideKeyboard()
@@ -70,9 +59,6 @@ class AddNewPatientFragment : Fragment() {
 
 
             }
-
-        }
-
 
         return v
     }

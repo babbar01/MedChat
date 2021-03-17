@@ -9,6 +9,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.EditText
+import android.widget.ImageView
 import android.widget.ScrollView
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.lifecycle.ViewModelProvider
@@ -43,6 +44,12 @@ class ChatFragment : Fragment() {
     ): View? {
         // Inflate the layout for this fragment
         val v =  inflater.inflate(R.layout.fragment_chat, container, false)
+
+        val backBtn = v.findViewById<ImageView>(R.id.back_btn_chatViewFragment)
+        backBtn.setOnClickListener{
+            findNavController().navigateUp()
+        }
+
         scrollView = v.findViewById(R.id.root_scrollview_chatFragment)
 
 //        chatboxLayout = v.findViewById<ConstraintLayout>(R.id.layout_chatbox)
@@ -90,8 +97,8 @@ class ChatFragment : Fragment() {
             }
         }
 
-        val chat_screen_top_panel = v.findViewById<ConstraintLayout>(R.id.chat_screen_top_panel)
-        chat_screen_top_panel.setOnClickListener{
+        val chatScreenTopPanel = v.findViewById<ConstraintLayout>(R.id.chat_screen_top_panel)
+        chatScreenTopPanel.setOnClickListener{
             navController?.navigate(R.id.action_chatFragment_to_patientDetailFragment)
         }
 
