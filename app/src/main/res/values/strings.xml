@@ -2,8 +2,7 @@
     <string name="app_name">MedChat</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
-    <string name="lorem">Lorem ipsum dolor sit a nulla porttitor massa. Pretium aenean pharetra magna ac placerat vestibulum lectus mauris ultrices. Euismod nisi porta lorem mollis.
-    </string>
+    <string name="lorem">Problem not added \nYou can edit this by clicking on the edit icon on the upper right corner of this section </string>
     <string name="txt_tab_history">History</string>
     <string name="txt_tab_add_record">Add Record</string>
 </resources>

@@ -1,12 +1,11 @@
 package com.example.medchat.repository
 
 import android.util.Log
-import androidx.lifecycle.LiveData
 import com.example.medchat.room.*
 import com.example.medchat.ui.ChatFragment
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.withContext
+import java.nio.file.InvalidPathException
 
 class Repository(
     val patientdao: PatientDao,
@@ -22,6 +21,11 @@ class Repository(
         bpDao.bpHistory(patientId)
     }
 
+    suspend fun latestBpRecord(patientId: Int) = withContext(Dispatchers.IO){
+        bpDao.latestBpRecord(patientId)
+    }
+
+    //
 
     suspend fun insertBloodSugarRecord(bloodSugarRecord: BloodSugarRecord) =
         bloodSugarDao.insertBloodSugarRecord(bloodSugarRecord)
@@ -29,7 +33,11 @@ class Repository(
     suspend fun bloodSugarHistory(patientId: Int) =
         withContext(Dispatchers.IO) { bloodSugarDao.historyBloodSugar(patientId) }
 
+    suspend fun latestBloodSugarRecord(patientId: Int) = withContext(Dispatchers.IO){
+        bloodSugarDao.latestBloodSugarRecord(patientId)
+    }
 
+    //
 
     suspend fun insertAllergyRecord(allergyRecord: AllergyRecord) =
         allergyDao.insertAllergyRecord(allergyRecord)
@@ -37,12 +45,21 @@ class Repository(
     suspend fun allergyHistory(patientId: Int) =
         withContext(Dispatchers.IO) { allergyDao.historyAllergy(patientId) }
 
+    suspend fun latestAllergyRecord(patientId: Int) = withContext(Dispatchers.IO){
+        allergyDao.latestAllergyRecord(patientId)
+    }
+
+    //
 
     suspend fun insertVaccineRecord(vaccineRecord: VaccineRecord) =
         vaccineDao.insertVaccineRecord(vaccineRecord)
 
     suspend fun vaccineHistory(patientId: Int) =
         withContext(Dispatchers.IO) { vaccineDao.historyVaccine(patientId) }
+
+    suspend fun latestVaccineRecord(patientId: Int) = withContext(Dispatchers.IO){
+        vaccineDao.latestVaccineRecord(patientId)
+    }
 
 
     //

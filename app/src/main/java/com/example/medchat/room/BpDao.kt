@@ -15,4 +15,7 @@ interface BpDao {
     @Query("Select * from bp_record_table where patientId = :patientId order by timestamp desc")
     fun bpHistory(patientId : Int) : LiveData<List<BpRecord>>
 
+    @Query("Select * from bp_record_table where timestamp = (Select max(timestamp) from bp_record_table where patientId = :patientId)")
+    fun latestBpRecord(patientId: Int) : LiveData<BpRecord>
+
 }

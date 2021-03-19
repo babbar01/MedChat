@@ -1,5 +1,6 @@
 package com.example.medchat.ui
 
+import android.annotation.SuppressLint
 import android.graphics.Color
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -16,10 +17,14 @@ import com.example.medchat.R
 import com.example.medchat.viewModel.SharedViewModel
 import com.google.android.material.appbar.CollapsingToolbarLayout
 import com.google.android.material.appbar.MaterialToolbar
+import kotlinx.android.synthetic.main.fragment_patient_detail.view.*
+import java.text.SimpleDateFormat
+import java.util.*
 
 
 class PatientDetailFragment : Fragment() {
 
+    @SuppressLint("SetTextI18n")
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -66,6 +71,52 @@ class PatientDetailFragment : Fragment() {
         layoutVaccine.setOnClickListener{
             sharedViewModel.activeRecord = 3
             findNavController().navigate(R.id.action_patientDetailFragment_to_timelineViewFragment)
+        }
+
+        val tvAge = v.tv_age_patient_detail
+        val tvContact = v.tv_contact_patient_detail
+        val tvAddress = v.tv_address_patient_detail
+        val tvBloodGroup = v.tv_blood_group_patient_detail
+        val tvLatestBp = v.tv_latest_blood_pressure_patient_detail
+        val tvLatestBs = v.tv_latest_blood_sugar_patient_detail
+        val tvLatestAllergy = v.tv_latest_allergy_patient_detail
+        val tvLatestVaccine = v.tv_latest_vaccine_patient_detail
+        val tvCreatedAt = v.tv_created_at_patient_detail
+        val tvProblem = v.tv_problem_patient_detail
+
+        sharedViewModel?.apply {
+
+            activeChatPatientDetails.observe(viewLifecycleOwner){
+                it.apply {
+
+                    tvAge.text = age.toString()
+                    tvAddress.text = address
+                    tvContact.text = mobile.toString()
+                    tvBloodGroup.text = bloodGroup?:"Not Added"
+                    tvCreatedAt.text = SimpleDateFormat("dd/MM/yyyy hh:mm aa", Locale.US).format(Date(createdAt))
+                    if(problem != "") tvProblem.text = problem
+
+                    collapsingToolbar.title = patientName
+                }
+            }
+
+
+            activePatientLatestBpRecord.observe(viewLifecycleOwner){
+                tvLatestBp.text =  if(it != null) "S: ${it.systolic} \nD: ${it.diastolic}" else "Not Added"
+            }
+
+            activePatientLatestBloodSugarRecord.observe(viewLifecycleOwner){
+                tvLatestBs.text = if(it != null) it?.toString() else "Not Added"
+            }
+
+            activePatientLatestAllergyRecordRecord.observe(viewLifecycleOwner){
+                tvLatestAllergy.text = it?: "Not Added"
+            }
+
+            activePatientLatestVaccineRecordpRecord.observe(viewLifecycleOwner){
+                tvLatestVaccine.text = it?: "Not Added"
+            }
+
         }
 
         return v

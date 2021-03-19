@@ -89,7 +89,7 @@ class SharedViewModel(application: Application) : AndroidViewModel(application) 
         viewModelScope.launch(Dispatchers.IO){ repository.insertBpRecord(bpRecord)}
     }
 
-    var activePatientBloodPressureHistory = activeChatPatientId.switchMap {
+    val activePatientBloodPressureHistory = activeChatPatientId.switchMap {
         liveData { emitSource(repository.bpHistory(it)) }
     }
 
@@ -99,7 +99,7 @@ class SharedViewModel(application: Application) : AndroidViewModel(application) 
         viewModelScope.launch(Dispatchers.IO){ repository.insertBloodSugarRecord(bloodSugarRecord)}
     }
 
-    var activePatientBloodSugarHistory = activeChatPatientId.switchMap {
+    val activePatientBloodSugarHistory = activeChatPatientId.switchMap {
         liveData { emitSource(repository.bloodSugarHistory(it)) }
     }
 
@@ -109,7 +109,7 @@ class SharedViewModel(application: Application) : AndroidViewModel(application) 
         viewModelScope.launch(Dispatchers.IO){ repository.insertAllergyRecord(allergyRecord)}
     }
 
-    var activePatientAllergyHistory = activeChatPatientId.switchMap {
+    val activePatientAllergyHistory = activeChatPatientId.switchMap {
         liveData { emitSource(repository.allergyHistory(it)) }
     }
 
@@ -119,9 +119,29 @@ class SharedViewModel(application: Application) : AndroidViewModel(application) 
         viewModelScope.launch(Dispatchers.IO){ repository.insertVaccineRecord(vaccineRecord)}
     }
 
-    var activePatientVaccineHistory = activeChatPatientId.switchMap {
+    val activePatientVaccineHistory = activeChatPatientId.switchMap {
         liveData { emitSource(repository.vaccineHistory(it)) }
     }
+
+    val activePatientLatestBpRecord = activeChatPatientId.switchMap {
+        liveData { emitSource(repository.latestBpRecord(it)) }
+    }
+
+    val activePatientLatestBloodSugarRecord = activeChatPatientId.switchMap {
+        liveData { emitSource(repository.latestBloodSugarRecord(it)) }
+    }
+
+    val activePatientLatestAllergyRecordRecord = activeChatPatientId.switchMap {
+        liveData { emitSource(repository.latestAllergyRecord(it)) }
+    }
+
+    val activePatientLatestVaccineRecordpRecord = activeChatPatientId.switchMap {
+        liveData { emitSource(repository.latestVaccineRecord(it)) }
+    }
+
+
+
+
 
 
 }
