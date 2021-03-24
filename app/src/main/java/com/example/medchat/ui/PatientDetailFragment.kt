@@ -17,6 +17,7 @@ import com.example.medchat.R
 import com.example.medchat.viewModel.SharedViewModel
 import com.google.android.material.appbar.CollapsingToolbarLayout
 import com.google.android.material.appbar.MaterialToolbar
+import kotlinx.android.synthetic.main.fragment_patient_detail.*
 import kotlinx.android.synthetic.main.fragment_patient_detail.view.*
 import java.text.SimpleDateFormat
 import java.util.*
@@ -117,6 +118,21 @@ class PatientDetailFragment : Fragment() {
                 tvLatestVaccine.text = it?: "Not Added"
             }
 
+        }
+
+        v.icon_edit_problem.setOnClickListener{
+            val fragment = CustomBottomSheetProblemDialogFragment()
+            fragment.show(requireActivity().supportFragmentManager,CustomBottomSheetProblemDialogFragment.TAG)
+        }
+
+        v.icon_edit_blood_group.setOnClickListener{
+            val fragment = CustomBottomSheetBloodGroupDialogFragment()
+            fragment.show(requireActivity().supportFragmentManager,CustomBottomSheetBloodGroupDialogFragment.TAG)
+        }
+
+        v.icon_edit_patient_details.setOnClickListener{
+            val fragment = CustomBottomSheetPatientDetailDialogFragment()
+            fragment.show(requireActivity().supportFragmentManager,CustomBottomSheetPatientDetailDialogFragment.TAG)
         }
 
         return v

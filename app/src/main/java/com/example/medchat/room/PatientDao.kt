@@ -19,6 +19,15 @@ interface PatientDao {
     @Query("Select * from patient_table where patientId = :patientId")
     fun returnPatient(patientId: Int): LiveData<Patient>
 
+    @Query("Update patient_table set age = :age, mobile = :contact, address = :address where patientId = :patientId")
+    suspend fun updateMustPatientDetail(age : Int,contact: Long,address : String,patientId: Int)
+
+    @Query("Update patient_table set problem = :problem where patientId = :patientId")
+    suspend fun updatePatientProblem(problem : String,patientId: Int)
+
+    @Query("Update patient_table set bloodGroup = :bloodGroup where patientId = :patientId")
+    suspend fun updateBloodGroup(bloodGroup : String,patientId: Int)
+
     // messages queries
 
     @Insert(onConflict = OnConflictStrategy.IGNORE)

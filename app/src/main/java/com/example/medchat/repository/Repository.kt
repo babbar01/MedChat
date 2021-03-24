@@ -8,11 +8,11 @@ import kotlinx.coroutines.withContext
 import java.nio.file.InvalidPathException
 
 class Repository(
-    val patientdao: PatientDao,
-    val bpDao: BpDao,
-    val bloodSugarDao: BloodSugarDao,
-    val allergyDao: AllergyDao,
-    val vaccineDao: VaccineDao
+    private val patientdao: PatientDao,
+    private val bpDao: BpDao,
+    private val bloodSugarDao: BloodSugarDao,
+    private val allergyDao: AllergyDao,
+    private val vaccineDao: VaccineDao
 ) {
 
     suspend fun insertBpRecord(bpRecord: BpRecord) = bpDao.insertBpRecord(bpRecord)
@@ -21,7 +21,7 @@ class Repository(
         bpDao.bpHistory(patientId)
     }
 
-    suspend fun latestBpRecord(patientId: Int) = withContext(Dispatchers.IO){
+    suspend fun latestBpRecord(patientId: Int) = withContext(Dispatchers.IO) {
         bpDao.latestBpRecord(patientId)
     }
 
@@ -33,7 +33,7 @@ class Repository(
     suspend fun bloodSugarHistory(patientId: Int) =
         withContext(Dispatchers.IO) { bloodSugarDao.historyBloodSugar(patientId) }
 
-    suspend fun latestBloodSugarRecord(patientId: Int) = withContext(Dispatchers.IO){
+    suspend fun latestBloodSugarRecord(patientId: Int) = withContext(Dispatchers.IO) {
         bloodSugarDao.latestBloodSugarRecord(patientId)
     }
 
@@ -45,7 +45,7 @@ class Repository(
     suspend fun allergyHistory(patientId: Int) =
         withContext(Dispatchers.IO) { allergyDao.historyAllergy(patientId) }
 
-    suspend fun latestAllergyRecord(patientId: Int) = withContext(Dispatchers.IO){
+    suspend fun latestAllergyRecord(patientId: Int) = withContext(Dispatchers.IO) {
         allergyDao.latestAllergyRecord(patientId)
     }
 
@@ -57,7 +57,7 @@ class Repository(
     suspend fun vaccineHistory(patientId: Int) =
         withContext(Dispatchers.IO) { vaccineDao.historyVaccine(patientId) }
 
-    suspend fun latestVaccineRecord(patientId: Int) = withContext(Dispatchers.IO){
+    suspend fun latestVaccineRecord(patientId: Int) = withContext(Dispatchers.IO) {
         vaccineDao.latestVaccineRecord(patientId)
     }
 
@@ -65,6 +65,15 @@ class Repository(
     //
 
     suspend fun insertPatient(patient: Patient) = patientdao.insertPatient(patient)
+
+    suspend fun updatePatientProblem(problem: String, patientId: Int) =
+        patientdao.updatePatientProblem(problem, patientId)
+
+    suspend fun updateBloodGroup(bloodGroup: String, patientId: Int) =
+        patientdao.updateBloodGroup(bloodGroup, patientId)
+
+    suspend fun updateMustPatientDetail(age : Int,contact: Long,address : String,patientId: Int) =
+        patientdao.updateMustPatientDetail(age,contact,address,patientId)
 
     suspend fun deletePatient(patientId: Int) = patientdao.deletePatient(patientId)
 

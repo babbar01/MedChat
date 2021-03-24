@@ -21,43 +21,44 @@ class SharedViewModel(application: Application) : AndroidViewModel(application) 
     private val vaccineDao = patientRoomDatabase.VaccineDao()
 
 
-    private val repository = Repository(patientDao,bpDao,bloodSugarDao,allergyDao,vaccineDao)
+    private val repository = Repository(patientDao, bpDao, bloodSugarDao, allergyDao, vaccineDao)
 
-    val allLastMessagesList: LiveData<List<LastMessage>>  = liveData{emitSource(repository.allLastMessagesList())}
+    val allLastMessagesList: LiveData<List<LastMessage>> =
+        liveData { emitSource(repository.allLastMessagesList()) }
 
-    val allPatientList : LiveData<List<PatientItem>>  = liveData { emitSource(repository.allPatients()) }
+    val allPatientList: LiveData<List<PatientItem>> =
+        liveData { emitSource(repository.allPatients()) }
 
-    val activeSearchQuery  = MutableLiveData<String>()
+    val activeSearchQuery = MutableLiveData<String>()
     /* is updated every time search query changes and initially set to ""(empty) in
      onCreate of NewMessageFragment */
 
-    val filteredPatientList : LiveData<List<PatientItem>> =
-        activeSearchQuery.switchMap {charString->
-        allPatientList.map {
-            var patientListFiltered : MutableList<PatientItem>
+    val filteredPatientList: LiveData<List<PatientItem>> =
+        activeSearchQuery.switchMap { charString ->
+            allPatientList.map {
+                var patientListFiltered: MutableList<PatientItem>
 
-            if (charString.isNullOrEmpty()) patientListFiltered = it as MutableList<PatientItem>
-            else{
-                patientListFiltered = mutableListOf()
+                if (charString.isNullOrEmpty()) patientListFiltered = it as MutableList<PatientItem>
+                else {
+                    patientListFiltered = mutableListOf()
 
-                for (patientrow in it){
-                    if (patientrow.patientName.toLowerCase().contains(charString.toLowerCase())
-                        || patientrow.patientId.toString().contains(charString))
-                        patientListFiltered.add(patientrow)
+                    for (patientrow in it) {
+                        if (patientrow.patientName.toLowerCase().contains(charString.toLowerCase())
+                            || patientrow.patientId.toString().contains(charString)
+                        )
+                            patientListFiltered.add(patientrow)
+                    }
                 }
+                // last line is returned
+                patientListFiltered
             }
-            // last line is returned
-            patientListFiltered
         }
-    }
-
-
 
 
     val activeChatPatientId = MutableLiveData<Int>()
-    var activeIntChatPatientId : Int? = null
+    var activeIntChatPatientId: Int? = null
 
-    val activeChatHistory : LiveData<List<Message>> =
+    val activeChatHistory: LiveData<List<Message>> =
         activeChatPatientId.switchMap { value ->
             liveData { emitSource(repository.listChatHistory(value)) }
         }
@@ -66,27 +67,43 @@ class SharedViewModel(application: Application) : AndroidViewModel(application) 
         liveData { emitSource(repository.returnPatient(it)) }
     }
 
-    val activeChatPatientName = activeChatPatientDetails.map{it.patientName}
+    val activeChatPatientName = activeChatPatientDetails.map { it.patientName }
 
-    fun loadChatHistory(patientId : Int){
+    fun loadChatHistory(patientId: Int) {
         activeChatPatientId.value = patientId
         activeIntChatPatientId = patientId
 //        viewModelScope.launch(Dispatchers.IO) { activeChatHistory = repository.listChatHistory(patientId) }
     }
 
-    fun insertMessage(message: Message){
+    fun insertMessage(message: Message) {
         viewModelScope.launch(Dispatchers.IO) { repository.createMessage(message) }
 
     }
 
-    fun insertPatient(newPatient : Patient){
-        viewModelScope.launch(Dispatchers.IO){ repository.insertPatient(newPatient)}
+    fun insertPatient(newPatient: Patient) {
+        viewModelScope.launch(Dispatchers.IO) { repository.insertPatient(newPatient) }
     }
 
-    var activeRecord : Int = 0   // 0 for bp, 1 for sugar and like this...
+    fun updatePatientProblem(problem: String, patientId: Int) =
+        viewModelScope.launch(Dispatchers.IO) {
+            repository.updatePatientProblem(
+                problem,
+                patientId
+            )
+        }
 
-    fun insertBpRecord(bpRecord: BpRecord){
-        viewModelScope.launch(Dispatchers.IO){ repository.insertBpRecord(bpRecord)}
+    fun updatePatientBloodGroup(bloodGroup: String, patientId: Int) = viewModelScope.launch {
+        repository.updateBloodGroup(bloodGroup, patientId)
+    }
+
+    fun updateMustPatientDetail(age : Int,contact: Long,address : String,patientId: Int) = viewModelScope.launch {
+        repository.updateMustPatientDetail(age,contact,address,patientId)
+    }
+
+    var activeRecord: Int = 0   // 0 for bp, 1 for sugar and like this...
+
+    fun insertBpRecord(bpRecord: BpRecord) {
+        viewModelScope.launch(Dispatchers.IO) { repository.insertBpRecord(bpRecord) }
     }
 
     val activePatientBloodPressureHistory = activeChatPatientId.switchMap {
@@ -95,8 +112,8 @@ class SharedViewModel(application: Application) : AndroidViewModel(application) 
 
     //
 
-    fun insertBloodSugarRecord(bloodSugarRecord: BloodSugarRecord){
-        viewModelScope.launch(Dispatchers.IO){ repository.insertBloodSugarRecord(bloodSugarRecord)}
+    fun insertBloodSugarRecord(bloodSugarRecord: BloodSugarRecord) {
+        viewModelScope.launch(Dispatchers.IO) { repository.insertBloodSugarRecord(bloodSugarRecord) }
     }
 
     val activePatientBloodSugarHistory = activeChatPatientId.switchMap {
@@ -105,8 +122,8 @@ class SharedViewModel(application: Application) : AndroidViewModel(application) 
 
     //
 
-    fun insertAllergyRecord(allergyRecord: AllergyRecord){
-        viewModelScope.launch(Dispatchers.IO){ repository.insertAllergyRecord(allergyRecord)}
+    fun insertAllergyRecord(allergyRecord: AllergyRecord) {
+        viewModelScope.launch(Dispatchers.IO) { repository.insertAllergyRecord(allergyRecord) }
     }
 
     val activePatientAllergyHistory = activeChatPatientId.switchMap {
@@ -115,8 +132,8 @@ class SharedViewModel(application: Application) : AndroidViewModel(application) 
 
     //
 
-    fun insertVaccineRecord(vaccineRecord: VaccineRecord){
-        viewModelScope.launch(Dispatchers.IO){ repository.insertVaccineRecord(vaccineRecord)}
+    fun insertVaccineRecord(vaccineRecord: VaccineRecord) {
+        viewModelScope.launch(Dispatchers.IO) { repository.insertVaccineRecord(vaccineRecord) }
     }
 
     val activePatientVaccineHistory = activeChatPatientId.switchMap {
@@ -138,10 +155,6 @@ class SharedViewModel(application: Application) : AndroidViewModel(application) 
     val activePatientLatestVaccineRecordpRecord = activeChatPatientId.switchMap {
         liveData { emitSource(repository.latestVaccineRecord(it)) }
     }
-
-
-
-
 
 
 }
