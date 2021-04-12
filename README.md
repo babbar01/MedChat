@@ -2,8 +2,8 @@
 For storing digital medical records
 <br>
 <a href="url"><img src="https://user-images.githubusercontent.com/53184162/114327387-7bb6c380-9b56-11eb-8c7d-8cb34a9c8c1c.jpeg" height = "auto" width ="160" ></a>
-<a href="url"><img src="https://user-images.githubusercontent.com/53184162/114327517-05669100-9b57-11eb-97c3-d2603e05769f.jpeg" height = "auto" width ="160" ></a>
-<a href="url"><img src="https://user-images.githubusercontent.com/53184162/114327548-23cc8c80-9b57-11eb-9284-b6299843d1cd.jpeg" height = "auto" width ="160" ></a>
+<a href="url"><img src="https://user-images.githubusercontent.com/53184162/114407581-26b29600-9bc6-11eb-9aec-9969338a40d2.jpeg" height = "auto" width ="160" ></a>
+<a href="url"><img src="https://user-images.githubusercontent.com/53184162/114407590-29ad8680-9bc6-11eb-9dc1-251f87bc662c.jpeg" height = "auto" width ="160" ></a>
 <a href="url"><img src="https://user-images.githubusercontent.com/53184162/114327554-29c26d80-9b57-11eb-9405-cb4acb3351d0.jpeg" height = "auto" width ="160" ></a>
 <a href="url"><img src="https://user-images.githubusercontent.com/53184162/114327558-2cbd5e00-9b57-11eb-9c99-a4aaf9014806.jpeg" height = "auto" width ="160" ></a>
 
