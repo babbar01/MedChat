@@ -51,7 +51,7 @@ class CustomBottomSheetBloodGroupDialogFragment : BottomSheetDialogFragment() {
         }
 
         btn_save_blood_group_dialog.setOnClickListener{
-            if (et_edit_blood_group_dialog.text.trim() == "")
+            if (et_edit_blood_group_dialog.text.isEmpty())
                 Toast.makeText(context,"You cannot leave it empty", Toast.LENGTH_SHORT).show()
             else{
                 sharedViewModel?.apply {

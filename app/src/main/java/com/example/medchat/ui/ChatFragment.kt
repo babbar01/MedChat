@@ -7,10 +7,8 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
-import android.widget.EditText
-import android.widget.ImageView
-import android.widget.ScrollView
+import android.widget.*
+import androidx.cardview.widget.CardView
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.NavController
@@ -32,21 +30,23 @@ class ChatFragment : Fragment() {
         const val TAG = "chatFragment"
     }
 
-    var viewModel : SharedViewModel? = null
-    var navController : NavController? = null
-    var scrollView : ScrollView? = null
-    var recyclerView : RecyclerView? = null
-    var chatListSize : Int = 0
+    var viewModel: SharedViewModel? = null
+    var navController: NavController? = null
+    var scrollView: ScrollView? = null
+    var recyclerView: RecyclerView? = null
+    var chatListSize: Int = 0
+    private lateinit var cardViewInformation: CardView
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        val v =  inflater.inflate(R.layout.fragment_chat, container, false)
+        val v = inflater.inflate(R.layout.fragment_chat, container, false)
+        cardViewInformation = v.findViewById(R.id.cardview_chat_frg_information)
 
         val backBtn = v.findViewById<ImageView>(R.id.back_btn_chatViewFragment)
-        backBtn.setOnClickListener{
+        backBtn.setOnClickListener {
             findNavController().navigateUp()
         }
 
@@ -63,19 +63,20 @@ class ChatFragment : Fragment() {
 
         recyclerView = v.findViewById(R.id.reyclerview_chat_history)
         val chatListAdapter = ChatListAdapter()
-        viewModel?.activeChatHistory?.observe(viewLifecycleOwner){
+        viewModel?.activeChatHistory?.observe(viewLifecycleOwner) {
             chatListSize = it.size
+            cardViewInformation.visibility = if (chatListSize <= 3) View.VISIBLE else View.GONE
             chatListAdapter.list = it
             chatListAdapter.notifyDataSetChanged()
         }
 
-        viewModel?.activeChatPatientName?.observe(viewLifecycleOwner){
+        viewModel?.activeChatPatientName?.observe(viewLifecycleOwner) {
             txt_active_chat_patient_name.text = it
         }
 
         val linearLayoutManager = LinearLayoutManager(context)
         linearLayoutManager.stackFromEnd = true
-        recyclerView?.apply{
+        recyclerView?.apply {
             adapter = chatListAdapter
             layoutManager = linearLayoutManager
         }
@@ -83,22 +84,28 @@ class ChatFragment : Fragment() {
         val etTypeMessage = v.findViewById<EditText>(R.id.edittext_chatbox)
         val btnSend = v.findViewById<Button>(R.id.button_chatbox_send)
 
-        btnSend.setOnClickListener{
-            Log.d(TAG, "onCreateView: hello ${viewModel?.activeChatPatientId == null}")
+        btnSend.setOnClickListener {
             viewModel?.activeIntChatPatientId?.let {
 
-                Log.d(TAG, "onCreateView: ${viewModel?.activeChatPatientId}")
+                if (etTypeMessage.text.isEmpty()) {
+                    Toast.makeText(
+                        context,
+                        "Please type anything and then press Save!",
+                        Toast.LENGTH_SHORT
+                    ).show()
+                } else {
 
-                val messageBody = etTypeMessage.text.trim().toString()
-                etTypeMessage.text.clear()
+                    val messageBody = etTypeMessage.text.trim().toString()
+                    etTypeMessage.text.clear()
 
-                val newMessage = Message(it,messageBody,System.currentTimeMillis())
-                viewModel?.insertMessage(newMessage)
+                    val newMessage = Message(it, messageBody, System.currentTimeMillis())
+                    viewModel?.insertMessage(newMessage)
+                }
             }
         }
 
         val chatScreenTopPanel = v.findViewById<ConstraintLayout>(R.id.chat_screen_top_panel)
-        chatScreenTopPanel.setOnClickListener{
+        chatScreenTopPanel.setOnClickListener {
             navController?.navigate(R.id.action_chatFragment_to_patientDetailFragment)
         }
 

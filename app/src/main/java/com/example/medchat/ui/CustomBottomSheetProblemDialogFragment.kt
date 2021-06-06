@@ -55,7 +55,7 @@ class CustomBottomSheetProblemDialogFragment : BottomSheetDialogFragment() {
 
 
         btn_save_problem_dialog.setOnClickListener{
-            if (et_edit_problem_dialog.text.trim() == "")
+            if (et_edit_problem_dialog.text.isEmpty())
                 Toast.makeText(context,"You cannot leave it empty",Toast.LENGTH_SHORT).show()
             else{
                 sharedViewModel?.apply {

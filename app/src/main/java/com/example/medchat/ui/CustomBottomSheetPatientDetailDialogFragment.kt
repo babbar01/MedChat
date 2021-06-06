@@ -48,8 +48,8 @@ class CustomBottomSheetPatientDetailDialogFragment : BottomSheetDialogFragment()
         }
 
         btn_save_patient_detail_dialog.setOnClickListener{
-            if (et_age_patient_detail_dialog.text.trim() == "" || et_contact_patient_detail_dialog.text.trim() == "" ||
-                    et_address_patient_detail_dialog.text.trim() == "")
+            if (et_age_patient_detail_dialog.text.isEmpty() || et_contact_patient_detail_dialog.text.isEmpty() ||
+                    et_address_patient_detail_dialog.text.isEmpty())
                 Toast.makeText(context,"You cannot leave these fields empty", Toast.LENGTH_SHORT).show()
             else{
                 sharedViewModel?.apply {

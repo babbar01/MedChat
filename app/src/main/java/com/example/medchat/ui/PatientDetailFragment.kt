@@ -85,7 +85,7 @@ class PatientDetailFragment : Fragment() {
         val tvCreatedAt = v.tv_created_at_patient_detail
         val tvProblem = v.tv_problem_patient_detail
 
-        sharedViewModel?.apply {
+        sharedViewModel.apply {
 
             activeChatPatientDetails.observe(viewLifecycleOwner){
                 it.apply {
@@ -107,7 +107,7 @@ class PatientDetailFragment : Fragment() {
             }
 
             activePatientLatestBloodSugarRecord.observe(viewLifecycleOwner){
-                tvLatestBs.text = if(it != null) it?.toString() else "Not Added"
+                tvLatestBs.text = if(it != null) it.toString() else "Not Added"
             }
 
             activePatientLatestAllergyRecordRecord.observe(viewLifecycleOwner){

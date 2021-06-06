@@ -7,6 +7,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
+import android.widget.TextView
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.NavController
 import androidx.navigation.fragment.findNavController
@@ -16,6 +17,7 @@ import com.example.medchat.R
 import com.example.medchat.adapters.MessageListAdapter
 import com.example.medchat.viewModel.SharedViewModel
 import com.google.android.material.floatingactionbutton.FloatingActionButton
+import kotlinx.android.synthetic.main.fragment_message_list.*
 
 
 class MessageListFragment : Fragment() {
@@ -23,6 +25,7 @@ class MessageListFragment : Fragment() {
     private var viewModel : SharedViewModel?  = null
     private var navController : NavController? = null
     private var messageListAdapter : MessageListAdapter? = null
+    private lateinit var tvNoRecentRecords : TextView
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -30,6 +33,7 @@ class MessageListFragment : Fragment() {
     ): View? {
         // Inflate the layout for this fragment
         val v = inflater.inflate(R.layout.fragment_message_list, container, false)
+        tvNoRecentRecords = v.findViewById(R.id.tv_no_recent_records)
         navController = findNavController()
 
         viewModel = activity?.run {
@@ -68,6 +72,7 @@ class MessageListFragment : Fragment() {
 
         viewModel?.allLastMessagesList?.observe(viewLifecycleOwner, {
 
+            tvNoRecentRecords.visibility = if(it.isEmpty()) View.VISIBLE else View.GONE
             Log.d(ChatFragment.TAG, "observeAndSetAdapterForChangesInList: ${it.size}")
             messageListAdapter?.list = it
             messageListAdapter?.notifyDataSetChanged()

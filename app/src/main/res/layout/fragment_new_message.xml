@@ -58,6 +58,27 @@
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
+    <androidx.cardview.widget.CardView
+        android:id="@+id/cardview_new_message_frg_empty_patients_information"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_margin="10dp"
+        app:cardElevation="10dp"
+        app:cardCornerRadius="10dp"
+        app:layout_constraintTop_toBottomOf="@id/topHeadingPanel">
+
+        <TextView
+            android:id="@+id/txt_new_message_frg_inf"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="16sp"
+            android:padding="10dp"
+            android:textColor="@color/colorBlack"
+            android:text="@string/no_patients_added"/>
+
+    </androidx.cardview.widget.CardView>
+
     <androidx.recyclerview.widget.RecyclerView
         android:layout_marginTop="15dp"
         android:id="@+id/recycler_list_Patients_newMsgScreen"
@@ -65,6 +86,6 @@
         android:layout_height="0dp"
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/topHeadingPanel" />
+        app:layout_constraintTop_toBottomOf="@id/cardview_new_message_frg_empty_patients_information"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

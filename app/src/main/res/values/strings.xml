@@ -5,4 +5,8 @@
     <string name="lorem">Problem not added \nYou can edit this by clicking on the edit icon on the upper right corner of this section </string>
     <string name="txt_tab_history">History</string>
     <string name="txt_tab_add_record">Add Record</string>
+    <string name="no_recent_records">No Recent Records Yet ! \nAdd them by clicking on button given in bottom right corner</string>
+    <string name="save_patient_record_here">You can Save Your Patient Records here \nClick on above patient name to add pre defined features like Blood Pressure, Blood Sugar etc.</string>
+    <string name="no_search_record_found">Sorry! No Patients founds for your search</string>
+    <string name="no_patients_added">No patients added yet !\nFirst Add Patients to save records</string>
 </resources>

@@ -62,24 +62,30 @@ class AddRecordFragment : Fragment() {
 
     private fun setClickListenerOnBtnVaccineAddRecordLayout(v: View) {
 
-        v.btn_save_vaccine_record.setOnClickListener{
+        v.btn_save_vaccine_record.setOnClickListener {
 
-            val vaccineString = v.et_vaccine_add_record.text.toString()
-            val vaccineNotes = v.et_vaccine_notes_add_record.text.toString()
+            if (v.et_vaccine_add_record.text.isEmpty()) {
+                Toast.makeText(context, "Add Some Record!", Toast.LENGTH_SHORT).show()
+            } else {
 
-            val newVaccineRecord = VaccineRecord(
-                sharedViewModel?.activeIntChatPatientId!!,
-                vaccineString,
-                vaccineNotes,
-                System.currentTimeMillis()
-            )
+                val vaccineString = v.et_vaccine_add_record.text.toString()
+                val vaccineNotes = v.et_vaccine_notes_add_record.text.toString()
 
-            v.et_vaccine_add_record.text.clear()
-            v.et_vaccine_notes_add_record.text.clear()
+                val newVaccineRecord = VaccineRecord(
+                    sharedViewModel?.activeIntChatPatientId!!,
+                    vaccineString,
+                    vaccineNotes,
+                    System.currentTimeMillis()
+                )
 
-            sharedViewModel?.insertVaccineRecord(newVaccineRecord)
+                v.et_vaccine_add_record.text.clear()
+                v.et_vaccine_notes_add_record.text.clear()
 
-            Toast.makeText(context, "Record Inserted", Toast.LENGTH_SHORT).show()
+                sharedViewModel?.insertVaccineRecord(newVaccineRecord)
+
+                Toast.makeText(context, "Record Inserted", Toast.LENGTH_SHORT).show()
+            }
+
 
         }
 
@@ -88,22 +94,28 @@ class AddRecordFragment : Fragment() {
     private fun setClickListenerOnBtnAllergyAddRecordLayout(v: View) {
 
         v.btn_save_allergy_record.setOnClickListener {
-            val allergyString = v.et_allergies_add_record.text.toString()
-            val allergyNotes = v.et_allergies_notes_add_record.text.toString()
 
-            val newAllergyRecord = AllergyRecord(
-                sharedViewModel?.activeIntChatPatientId!!,
-                allergyString,
-                allergyNotes,
-                System.currentTimeMillis()
-            )
+            if (v.et_allergies_add_record.text.isEmpty()) {
+                Toast.makeText(context, "Add Some Record!", Toast.LENGTH_SHORT).show()
+            } else {
 
-            sharedViewModel?.insertAllergyRecord(newAllergyRecord)
+                val allergyString = v.et_allergies_add_record.text.toString()
+                val allergyNotes = v.et_allergies_notes_add_record.text.toString()
 
-            v.et_allergies_add_record.text.clear()
-            v.et_allergies_notes_add_record.text.clear()
+                val newAllergyRecord = AllergyRecord(
+                    sharedViewModel?.activeIntChatPatientId!!,
+                    allergyString,
+                    allergyNotes,
+                    System.currentTimeMillis()
+                )
 
-            Toast.makeText(context, "Record Inserted", Toast.LENGTH_SHORT).show()
+                sharedViewModel?.insertAllergyRecord(newAllergyRecord)
+
+                v.et_allergies_add_record.text.clear()
+                v.et_allergies_notes_add_record.text.clear()
+
+                Toast.makeText(context, "Record Inserted", Toast.LENGTH_SHORT).show()
+            }
         }
 
     }
@@ -120,24 +132,30 @@ class AddRecordFragment : Fragment() {
                 else -> "Not specified"
             }
 
-            val resultString = v.et_blood_sugar_result.text.toString().toInt()
-            val bloodSugarNotes = v.et_blood_sugar_notes.text.toString()
+            if (v.et_blood_sugar_result.text.isEmpty()) {
+                Toast.makeText(context, "Please add Result value!", Toast.LENGTH_SHORT).show()
+            } else {
 
-            val newBloodSugarRecord = BloodSugarRecord(
-                sharedViewModel?.activeIntChatPatientId!!,
-                typeString,
-                resultString,
-                bloodSugarNotes,
-                System.currentTimeMillis()
-            )
+                val resultString = v.et_blood_sugar_result.text.toString().toInt()
+                val bloodSugarNotes = v.et_blood_sugar_notes.text.toString()
 
-            v.et_blood_sugar_result.text.clear()
-            v.et_blood_sugar_notes.text.clear()
-            radioGroup.clearCheck()
+                val newBloodSugarRecord = BloodSugarRecord(
+                    sharedViewModel?.activeIntChatPatientId!!,
+                    typeString,
+                    resultString,
+                    bloodSugarNotes,
+                    System.currentTimeMillis()
+                )
 
-            sharedViewModel?.insertBloodSugarRecord(newBloodSugarRecord)
+                v.et_blood_sugar_result.text.clear()
+                v.et_blood_sugar_notes.text.clear()
+                radioGroup.clearCheck()
 
-            Toast.makeText(context, "Record Inserted", Toast.LENGTH_SHORT).show()
+                sharedViewModel?.insertBloodSugarRecord(newBloodSugarRecord)
+
+                Toast.makeText(context, "Record Inserted", Toast.LENGTH_SHORT).show()
+            }
+
 
         }
 
@@ -153,22 +171,35 @@ class AddRecordFragment : Fragment() {
 
         btnAddNewBpRecord.setOnClickListener {
 
-            val bpRecord = BpRecord(
-                sharedViewModel?.activeIntChatPatientId!!,
-                systolic.text.toString().toInt(),
-                diastolic.text.toString().toInt(),
-                pulse.text.toString().toInt(),
-                bpNotes.text.toString(),
-                System.currentTimeMillis()
-            )
+            if (systolic.text.isEmpty() ||
+                diastolic.text.isEmpty() ||
+                pulse.text.isEmpty()
+            ) {
+                Toast.makeText(
+                    context,
+                    "Please add all the values excluding notes",
+                    Toast.LENGTH_SHORT
+                ).show()
+            } else {
 
-            systolic.text.clear()
-            diastolic.text.clear()
-            pulse.text.clear()
-            bpNotes.text.clear()
-            sharedViewModel?.insertBpRecord(bpRecord)
+                val bpRecord = BpRecord(
+                    sharedViewModel?.activeIntChatPatientId!!,
+                    systolic.text.toString().toInt(),
+                    diastolic.text.toString().toInt(),
+                    pulse.text.toString().toInt(),
+                    bpNotes.text.toString(),
+                    System.currentTimeMillis()
+                )
 
-            Toast.makeText(context, "record inserted", Toast.LENGTH_SHORT).show()
+                systolic.text.clear()
+                diastolic.text.clear()
+                pulse.text.clear()
+                bpNotes.text.clear()
+                sharedViewModel?.insertBpRecord(bpRecord)
+
+                Toast.makeText(context, "record inserted", Toast.LENGTH_SHORT).show()
+            }
+
 
         }
     }
