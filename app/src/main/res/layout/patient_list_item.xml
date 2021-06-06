@@ -27,7 +27,7 @@
                 android:id="@+id/list_patient_image"
                 android:layout_width="60dp"
                 android:layout_height="60dp"
-                android:src="@drawable/profile2"
+                android:src="@drawable/profile"
                 android:scaleType="centerCrop"/>
 
         </androidx.cardview.widget.CardView>

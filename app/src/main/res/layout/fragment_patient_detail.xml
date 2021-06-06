@@ -34,7 +34,7 @@
                         android:padding="10dp"
                         android:layout_width="match_parent"
                         android:layout_height="220dp"
-                        android:src="@drawable/profile2"
+                        android:src="@drawable/profile"
                         android:background="@color/colorWhite"
                         android:fitsSystemWindows="true"/>
 
