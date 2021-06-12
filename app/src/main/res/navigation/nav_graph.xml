@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/listFragment"
-        android:name="com.example.medchat.ui.MessageListFragment"
+        android:name="com.babbarandrotech.medchat.ui.MessageListFragment"
         android:label="fragment_list"
         tools:layout="@layout/fragment_message_list" >
         <action
@@ -34,7 +34,7 @@
     </fragment>
     <fragment
         android:id="@+id/chatFragment"
-        android:name="com.example.medchat.ui.ChatFragment"
+        android:name="com.babbarandrotech.medchat.ui.ChatFragment"
         android:label="fragment_chat"
         tools:layout="@layout/fragment_chat" >
         <action
@@ -47,12 +47,12 @@
     </fragment>
     <fragment
         android:id="@+id/addNewPatient"
-        android:name="com.example.medchat.ui.AddNewPatientFragment"
+        android:name="com.babbarandrotech.medchat.ui.AddNewPatientFragment"
         android:label="fragment_add_new_patient"
         tools:layout="@layout/fragment_add_new_patient" />
     <fragment
         android:id="@+id/newMessage"
-        android:name="com.example.medchat.ui.NewMessageFragment"
+        android:name="com.babbarandrotech.medchat.ui.NewMessageFragment"
         android:label="fragment_new_message"
         tools:layout="@layout/fragment_new_message" >
         <action
@@ -65,7 +65,7 @@
     </fragment>
     <fragment
         android:id="@+id/patientDetailFragment"
-        android:name="com.example.medchat.ui.PatientDetailFragment"
+        android:name="com.babbarandrotech.medchat.ui.PatientDetailFragment"
         android:label="fragment_patient_detail"
         tools:layout="@layout/fragment_patient_detail" >
         <action
@@ -78,7 +78,7 @@
     </fragment>
     <fragment
         android:id="@+id/timelineViewFragment"
-        android:name="com.example.medchat.ui.TimelineViewFragment"
+        android:name="com.babbarandrotech.medchat.ui.TimelineViewFragment"
         android:label="fragment_timeline_view"
         tools:layout="@layout/fragment_timeline_view" />
 </navigation>

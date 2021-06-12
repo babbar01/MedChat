@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/historyFragment"
-        android:name="com.example.medchat.ui.HistoryFragment"
+        android:name="com.babbarandrotech.medchat.ui.HistoryFragment"
         android:label="fragment_history"
         tools:layout="@layout/fragment_history" >
         <action
@@ -16,7 +16,7 @@
     </fragment>
     <fragment
         android:id="@+id/addRecordFragment"
-        android:name="com.example.medchat.ui.AddRecordFragment"
+        android:name="com.babbarandrotech.medchat.ui.AddRecordFragment"
         android:label="fragment_add_record"
         tools:layout="@layout/fragment_add_record" >
         <action

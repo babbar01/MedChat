@@ -10,7 +10,7 @@ android {
     buildToolsVersion "30.0.3"
 
     defaultConfig {
-        applicationId "com.example.medchat"
+        applicationId "com.babbarandrotech.medchat"
         minSdkVersion 22
         targetSdkVersion 30
         versionCode 1
