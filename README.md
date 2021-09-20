@@ -13,8 +13,20 @@ For storing digital medical records
 <a href="url"><img src="https://user-images.githubusercontent.com/53184162/114327714-d270cd00-9b57-11eb-97db-f4874d2b2c56.jpeg" height = "auto" width ="160" ></a>
 <a href="url"><img src="https://user-images.githubusercontent.com/53184162/114327719-d56bbd80-9b57-11eb-937b-206117c8eee4.jpeg" height = "auto" width ="160" ></a>
 
-### An android application for doctors, chemists and other medical staff to store their patients data in a very convenient way - JUST LIKE WE USE WHATSAPP
-### MVVM architecture followed with use of various Android Jetpack components like 
-### ROOM Persistence library for local database
-### Livedata for real time changes
-### Kotlin Coroutines for thread management
+## Flow Chart : 
+<a href="url"><img src="https://user-images.githubusercontent.com/53184162/134051632-2b3843cc-fbfe-4570-a7f6-1a2e8ac49130.png"></a>
+
+## About
+
+Android/Kotlin codebase android application for doctors, chemists and other medical staff to store their patients data in a very convenient way - JUST LIKE WE USE WHATSAPP
+- You can search for patients, write custom records and arrange them how you want.
+- Very Simple UI , works just like you use your chat applications in your daily life
+- If you are not doctor,chemists then you can also use this app to store your family health records in one app and that too in very customised manner without knowing any of the medical terms
+- Access your patient records anytime, anywhere and is very helpful specially when you are working virtually
+
+## Built With 🛠: 
+
+- MVVM architecture followed with use of various Android Jetpack components like 
+- ROOM Persistence library for local database
+- Livedata for real time changes
+- Kotlin Coroutines for thread management
