@@ -2,7 +2,9 @@
 For storing digital medical records
 <br>
 
-<a href="https://play.google.com/store/apps/details?id=com.babbarandrotech.medchat"><a href="url"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/7/78/Google_Play_Store_badge_EN.svg/1200px-Google_Play_Store_badge_EN.svg.png" height = "auto" width ="360" ></a></a>
+[<img src="https://play.google.com/intl/en_us/badges/images/generic/en_badge_web_generic.png" 
+alt="Download from Google Play" 
+height="80">](https://play.google.com/store/apps/details?id=com.babbarandrotech.medchat)
 <br><br>
 <a href="url"><img src="https://user-images.githubusercontent.com/53184162/114327387-7bb6c380-9b56-11eb-8c7d-8cb34a9c8c1c.jpeg" height = "auto" width ="160" ></a>
 <a href="url"><img src="https://user-images.githubusercontent.com/53184162/114407581-26b29600-9bc6-11eb-9aec-9969338a40d2.jpeg" height = "auto" width ="160" ></a>
